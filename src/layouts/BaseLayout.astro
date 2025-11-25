@@ -1,0 +1,69 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Cerrajería Maresca | Urgencias 24 horas en La Boca",
+  description = "Cerrajería Maresca: urgencias, reparaciones, aperturas de vehículos y puertas de cristal. Palos 721, Local 7, La Boca. Atención 24 horas.",
+} = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#b30000" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Cerrajería Maresca" />
+  <link href="src/styles/global.css" rel="stylesheet">
+
+    <link rel="canonical" href="https://tusitio.com/" />
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-50 antialiased">
+    <header class="border-b border-slate-800 from-slate-950 via-slate-900 to-slate-950/95">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:py-4">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-md bg-red-700/90 shadow">
+            <span class="text-lg font-bold tracking-tight">CM</span>
+          </div>
+          <div>
+            <p class="text-base font-semibold leading-tight">
+              Cerrajería Maresca
+            </p>
+            <p class="text-xs text-slate-300">
+              Urgencias 24 horas · La Boca
+            </p>
+          </div>
+        </div>
+        <div class="hidden text-right text-xs md:block">
+          <p class="font-medium">Atención 24 horas</p>
+          <p class="text-slate-300">Tel: 15-6218-1863 · 15-3316-4381</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 pb-16 pt-6 md:pt-10">
+      <slot />
+    </main>
+
+    <footer class="border-t border-slate-900 bg-slate-950/95">
+      <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-xs text-slate-400 md:flex-row md:items-center md:justify-between">
+        <p>
+          © {new Date().getFullYear()} Cerrajería Maresca · Palos 721, Local 7, La Boca
+        </p>
+        <p>
+          Urgencias, reparaciones, puertas de cristal, herrajes y cerraduras, apertura de vehículos.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

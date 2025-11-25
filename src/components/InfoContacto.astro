@@ -1,0 +1,98 @@
+---
+const telefono1 = "15-6218-1863";
+const telefono2 = "15-3316-4381";
+const direccion = "Palos 721, Local 7, La Boca, CABA";
+const email = "cerrajeriamaresca@hotmail.com"; // corregí a mano; ajustá según tarjeta real
+---
+
+<section
+  aria-labelledby="contacto-title"
+  class="mb-4 grid gap-6 rounded-2xl border border-slate-800 bg-slate-900/60 p-5 md:grid-cols-[2fr,1.4fr]"
+>
+  <div>
+    <h2
+      id="contacto-title"
+      class="text-xl font-semibold tracking-tight md:text-2xl"
+    >
+      Datos de contacto
+    </h2>
+    <p class="mt-1 text-xs text-slate-300 md:text-sm">
+      Podés acercarte al local, llamarnos o escribirnos por WhatsApp las 24
+      horas.
+    </p>
+
+    <dl class="mt-4 space-y-3 text-sm">
+      <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+        <dt class="w-28 text-slate-400">Teléfonos</dt>
+        <dd class="space-y-1">
+          <a
+            href={`tel:${telefono1.replace(/[^0-9]/g, "")}`}
+            class="block text-slate-50 underline-offset-2 hover:underline"
+          >
+            {telefono1}
+          </a>
+          <a
+            href={`tel:${telefono2.replace(/[^0-9]/g, "")}`}
+            class="block text-slate-50 underline-offset-2 hover:underline"
+          >
+            {telefono2}
+          </a>
+        </dd>
+      </div>
+
+      <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+        <dt class="w-28 text-slate-400">Dirección</dt>
+        <dd class="text-slate-50">{direccion}</dd>
+      </div>
+
+      <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+        <dt class="w-28 text-slate-400">Correo</dt>
+        <dd>
+          <a
+            href={`mailto:${email}`}
+            class="text-slate-50 underline-offset-2 hover:underline"
+          >
+            {email}
+          </a>
+        </dd>
+      </div>
+
+      <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+        <dt class="w-28 text-slate-400">Redes</dt>
+        <dd class="flex flex-wrap gap-2 text-xs">
+          <a
+            href="https://www.instagram.com/cerrajeria_maresca"
+            target="_blank"
+            rel="noreferrer"
+            class="rounded-full bg-slate-800 px-2 py-1 hover:bg-slate-700"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://www.facebook.com/CerrajeriaMaresca"
+            target="_blank"
+            rel="noreferrer"
+            class="rounded-full bg-slate-800 px-2 py-1 hover:bg-slate-700"
+          >
+            Facebook
+          </a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="space-y-3 text-xs text-slate-300">
+    <h3 class="text-sm font-semibold text-slate-50">
+      ¿En qué zonas trabajamos?
+    </h3>
+    <p>
+      Local en La Boca y atención habitual en barrios cercanos de CABA y zona
+      sur según disponibilidad. Para otras zonas, consultanos por WhatsApp
+      indicando dirección y tipo de trabajo.
+    </p>
+    <p>
+      Para urgencias, indicá si se trata de vivienda, comercio o vehículo y si
+      hay menores o personas mayores involucradas. Eso nos ayuda a priorizar.
+    </p>
+  </div>
+</section>

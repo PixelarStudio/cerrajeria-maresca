@@ -1,0 +1,68 @@
+---
+import { getCollection } from "astro:content";
+
+const servicios = await getCollection("servicios");
+const serviciosOrdenados = servicios
+  .slice()
+  .sort((a, b) => a.data.orden - b.data.orden);
+---
+
+<section aria-labelledby="servicios-title" class="mb-10">
+  <div class="mb-4 flex items-end justify-between gap-3">
+    <div>
+      <h2
+        id="servicios-title"
+        class="text-xl font-semibold tracking-tight md:text-2xl"
+      >
+        Servicios de cerrajería
+      </h2>
+      <p class="mt-1 text-xs text-slate-300 md:text-sm">
+        Trabajamos sobre cerraduras, herrajes, puertas de cristal y apertura de
+        vehículos, con atención en La Boca y alrededores.
+      </p>
+    </div>
+  </div>
+
+  {serviciosOrdenados.length === 0 ? (
+    <p class="rounded-lg border border-dashed border-slate-700 bg-slate-900/60 px-4 py-3 text-sm text-slate-300">
+      Próximamente se publicará el detalle de los servicios. Si necesitás algo
+      puntual, escribinos por WhatsApp.
+    </p>
+  ) : (
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {serviciosOrdenados.map(({ id, data }) => (
+        <article
+          class="flex h-full flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-sm shadow-sm transition hover:border-red-500/60 hover:shadow-md"
+          data-id={id}
+        >
+          <header class="mb-2 flex items-start gap-2">
+            {data.icon && (
+              <span class="mt-0.5 text-lg" aria-hidden="true">
+                {data.icon}
+              </span>
+            )}
+            <div>
+              <h3 class="font-semibold">{data.title}</h3>
+              {data.destacado && (
+                <p class="text-[0.65rem] uppercase tracking-wide text-yellow-300">
+                  Servicio frecuente
+                </p>
+              )}
+            </div>
+          </header>
+          <p class="mb-3 text-xs leading-relaxed text-slate-200">
+            {data.descripcionCorta}
+          </p>
+          {data.descripcionLarga && (
+            <p class="mb-3 text-[0.7rem] leading-relaxed text-slate-400">
+              {data.descripcionLarga}
+            </p>
+          )}
+          <div class="mt-auto pt-1 text-[0.7rem] text-slate-400">
+            Consultá por costos y tiempos para tu dirección.
+          </div>
+        </article>
+      ))}
+    </div>
+  )}
+</section>
