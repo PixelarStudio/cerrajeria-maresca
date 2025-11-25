@@ -5,8 +5,9 @@ import ServiciosGrid from "../components/ServiciosGrid.astro";
 import InfoContacto from "../components/InfoContacto.astro";
 import WhatsAppFab from "../components/WhatsAppFab.jsx";
 
-
-const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "";
+// Número principal de WhatsApp (podés dejarlo hardcodeado o por .env)
+const whatsappNumber =
+  import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "5491162181863";
 ---
 
 <BaseLayout>
@@ -14,8 +15,10 @@ const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "";
   <ServiciosGrid />
   <InfoContacto />
 
-  {
-    /* Isla React: botón flotante WhatsApp */
-  }
-  <WhatsAppFab client:idle whatsappNumber={whatsappNumber} />
+  <!-- FAB de WhatsApp: OBLIGATORIO pasar phone porque el componente lo pide -->
+  <WhatsAppFab
+    client:idle
+    whatsappNumber={whatsappNumber}
+    phone={whatsappNumber}
+  />
 </BaseLayout>

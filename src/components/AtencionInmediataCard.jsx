@@ -193,7 +193,7 @@ export default function AtencionInmediataCard({
       aria-label="Atención inmediata por WhatsApp"
       className={[
         "relative w-full max-w-md rounded-3xl border border-amber-400/30",
-        "bg-[radial-gradient(circle_at_top,_#7c2d12_0,_#020617_55%,_#020617_100%)]",
+        "bg-[radial-gradient(circle_at_top,#7c2d12_0,#020617_52%,#020617_100%)]",
         "p-4 sm:p-6 text-slate-50 shadow-xl",
         // ALTURA FIJA PARA QUE EL HERO NO SALTE
         "min-h-[440px] sm:min-h-[460px]",

@@ -2,79 +2,91 @@
 import AtencionInmediataCard from "./AtencionInmediataCard.jsx";
 
 const telefonoPrincipal = "15-6218-1863";
-const whatsappNumber =
-  import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "5491162181863";
+const telefonoPrincipalLink = telefonoPrincipal.replace(/[^0-9]/g, "");
+
+const whatsappNumber = "5491162181863";
 ---
 
 <section
-  class="mb-10 grid gap-8 rounded-3xl bg-[radial-gradient(circle_at_top,_#7c2d12_0,_#020617_55%,_#020617_100%)] p-6 shadow-2xl ring-1 ring-red-900/40 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:p-10"
+  id="inicio"
+  class="mb-14 rounded-[28px] border border-orange-900/40 bg-[radial-gradient(circle_at_top,#7c2d12_0,#020617_52%,#020617_100%)] px-5 py-8 shadow-[0_0_0_1px_rgba(15,23,42,0.8),0_40px_120px_rgba(0,0,0,0.85)] md:px-10 md:py-10"
 >
-  <!-- Columna izquierda: mensaje principal -->
-  <div class="flex flex-col justify-center gap-5">
-    <div class="flex flex-wrap gap-3 text-xs font-semibold">
-      <span
-        class="inline-flex items-center rounded-full bg-red-700 px-3 py-1 text-amber-100"
-      >
-        Cerrajería Maresca
-      </span>
-      <span
-        class="inline-flex items-center rounded-full bg-slate-900/70 px-3 py-1 text-slate-100"
-      >
-        Urgencias · La Boca y alrededores
-      </span>
-    </div>
+  <div
+    class="mx-auto grid max-w-6xl gap-8 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:items-start"
+  >
+    <!-- Columna izquierda: mensaje principal -->
+    <div class="space-y-6">
+      <div class="flex flex-wrap gap-2 text-xs font-semibold">
+        <span
+          class="inline-flex items-center rounded-full bg-red-800/70 px-3 py-1 text-[0.7rem] uppercase tracking-wide text-slate-50"
+        >
+          Cerrajería Cerca tuyo
+        </span>
+        <span
+          class="inline-flex items-center rounded-full bg-slate-900/80 px-3 py-1 text-[0.7rem] uppercase tracking-wide text-slate-200"
+        >
+          Urgencias · La Boca y alrededores
+        </span>
+      </div>
 
-    <h1
-      class="text-3xl font-semibold tracking-tight text-slate-50 md:text-4xl lg:text-5xl"
-    >
-      Cerrajería en La Boca,
-      <span class="block">para viviendas y comercios.</span>
-    </h1>
+      <div class="space-y-4">
+  <h1
+    class="text-3xl font-semibold leading-tight tracking-tight text-slate-50 md:text-4xl lg:text-[2.6rem]"
+  >
+    Cerrajería Maresca,
+    <br class="hidden md:block" />
+    guardia 24 horas en La Boca.
+  </h1>
 
-    <p
-      class="max-w-xl text-sm leading-relaxed text-slate-100/90 md:text-base"
-    >
-      Abrimos puertas, reparamos cerraduras y trabajamos con puertas de
-      cristal, frentes vidriados, herrajes especiales y apertura de vehículos.
-      Atendemos desde nuestro local en Palos 721, Local 7.
-    </p>
+  {/** Versión mobile: copy corto y directo */ }
+  <p class="max-w-xl text-sm leading-relaxed text-slate-200 md:hidden">
+    Apertura de puertas, reparación de cerraduras y apertura de vehículos en
+    La Boca y alrededores. Atención todos los días, las 24 horas.
+  </p>
 
-    <ul class="space-y-1 text-sm text-slate-100/90">
-      <li>• Emergencias sin turno, todos los días.</li>
-      <li>• Apertura de puertas sin rotura cuando es posible.</li>
-      <li>• Apertura de vehículos y cierra puertas de piso.</li>
-    </ul>
+  {/** Versión desktop: texto completo pero sin repetir todo */ }
+  <p
+    class="hidden max-w-xl text-sm leading-relaxed text-slate-200 md:block md:text-[0.95rem]"
+  >
+    Local a la calle en Palos 721, Local 7. Trabajamos en viviendas, comercios
+    y consorcios: aperturas sin rotura cuando es posible, reparación y recambio
+    de cerraduras, puertas de cristal y frentes vidriados, cierra puertas de
+    piso y apertura de vehículos.
+  </p>
 
-    <div class="mt-3 flex flex-col gap-3 sm:flex-row">
-      <a
-        href={`tel:${telefonoPrincipal.replace(/[^0-9]/g, "")}`}
-        class="inline-flex items-center justify-center rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/90 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-      >
-        Llamar ahora · {telefonoPrincipal}
-      </a>
-      <a
-        href="#contacto"
-        class="inline-flex items-center justify-center rounded-full border border-emerald-500/70 px-5 py-2.5 text-sm font-semibold text-emerald-100 shadow-sm transition hover:bg-emerald-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/90 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-      >
-Contactar ahora      </a>
-    </div>
+  {/** Bullets solo en desktop: complementan, no repiten el párrafo */ }
+  <ul class="hidden space-y-1.5 text-[0.9rem] text-slate-200 md:block">
+    <li>• Respuesta prioritaria en urgencias (personas afuera, llaves adentro).</li>
+    <li>• Podés enviar fotos por WhatsApp para cotizar mejor el trabajo.</li>
+    <li>• Cobertura en La Boca y barrios cercanos, según disponibilidad.</li>
+  </ul>
+</div>
 
-    <div
-      class="mt-3 flex flex-col gap-1 text-[0.75rem] text-slate-200 sm:flex-row sm:gap-6"
-    >
-      <p>
-        <span class="font-semibold">Guardia de cerrajería.</span> Priorizamos
-        urgencias en La Boca y zonas cercanas.
+      <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a
+          href={`tel:${telefonoPrincipalLink}`}
+          class="inline-flex min-w-[220px] items-center justify-center rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-500/25 transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+        >
+          Llamar ahora · {telefonoPrincipal}
+        </a>
+
+        <a
+          href="#servicios"
+          class="inline-flex min-w-[220px] items-center justify-center rounded-full border border-emerald-500/70 bg-slate-950/70 px-5 py-2.5 text-sm font-semibold text-emerald-200 shadow-sm transition hover:border-emerald-400 hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+        >
+          Ver trabajos que hacemos
+        </a>
+      </div>
+
+      <p class="mt-2 text-[0.75rem] text-slate-400">
+        Guardia de cerrajería. Priorizamos urgencias (personas afuera, llaves
+        adentro) en La Boca y barrios cercanos.
       </p>
-      <p>
-        <span class="font-semibold">Local a la calle.</span> Palos 721 · Local 7
-        · Referencia: zona La Boca.
-      </p>
     </div>
-  </div>
 
-  <!-- Columna derecha: panel de atención inmediata (React island) -->
-  <div class="flex items-center justify-center">
-    <AtencionInmediataCard client:visible whatsappNumber={whatsappNumber} />
+    <!-- Columna derecha: wizard de WhatsApp -->
+    <div class="flex items-stretch justify-end md:justify-center">
+      <AtencionInmediataCard client:load whatsappNumber={whatsappNumber} />
+    </div>
   </div>
 </section>
