@@ -1,9 +1,53 @@
 ---
+import { getCollection } from "astro:content";
+import ServiceIcon from "./ServiceIcon.astro";
+
 const serviciosIntroMobile =
   "Elegí el tipo de trabajo que necesitás. Atendemos viviendas, comercios y consorcios en La Boca y alrededores.";
 
 const serviciosIntroDesktop =
   "Trabajamos sobre cerraduras, herrajes, puertas de cristal y apertura de vehículos, con atención en La Boca y alrededores.";
+
+// Traemos los servicios desde content collections, ordenados por `orden`
+const servicios = (await getCollection("servicios")).sort(
+  (a, b) => (a.data.orden ?? 0) - (b.data.orden ?? 0)
+);
+
+// Subtítulo bajo el título según slug
+const subheadingBySlug = {
+  "urgencias-24-horas": "Servicio especializado",
+  reparaciones: "Servicio especializado",
+  "puertas-de-cristal": "Comercios y locales",
+  "herrajes-y-cerraduras": "Refuerzos de seguridad",
+  "cierrapuertas-de-piso": "Edificios y locales",
+  "apertura-de-vehiculos": "Autos y utilitarios",
+};
+
+// Color del subtítulo (mismo criterio que antes)
+const subheadingClassBySlug = {
+  "urgencias-24-horas": "text-red-300/80",
+  reparaciones: "text-sky-300/80",
+  "puertas-de-cristal": "text-cyan-300/80",
+  "herrajes-y-cerraduras": "text-emerald-300/80",
+  "cierrapuertas-de-piso": "text-amber-300/80",
+  "apertura-de-vehiculos": "text-indigo-300/80",
+};
+
+// Footer explicativo según slug (lo que tenías hardcodeado)
+const footerBySlug = {
+  "urgencias-24-horas":
+    "Pensado para personas que quedaron afuera o necesitan atención inmediata.",
+  reparaciones:
+    "Ideal cuando la cerradura todavía funciona pero no da seguridad.",
+  "puertas-de-cristal":
+    "Pensado para negocios, oficinas y frentes vidriados.",
+  "herrajes-y-cerraduras":
+    "Útil cuando querés reforzar accesos sin cambiar toda la puerta.",
+  "cierrapuertas-de-piso":
+    "Recomendado para puertas de acceso principal y pasillos de uso frecuente.",
+  "apertura-de-vehiculos":
+    "Para aperturas sin rotura en vía pública, garages o cocheras.",
+};
 ---
 
 <section
@@ -27,355 +71,75 @@ const serviciosIntroDesktop =
   </div>
 
   <div class="grid gap-4 md:grid-cols-3">
-    <!-- Urgencias 24 horas -->
-    <article
-      class="flex h-full flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4 shadow-sm"
-    >
-      <header class="mb-2 flex items-center gap-3">
-        <div
-          class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-red-900/40 text-red-200"
+    {servicios.map((service) => {
+      const { title, slug, descripcionCorta, descripcionLarga, imagen, imagenAlt } =
+        service.data;
+
+      const subheading = subheadingBySlug[slug] ?? "Servicio de cerrajería";
+      const subClass =
+        subheadingClassBySlug[slug] ?? "text-slate-300/80";
+      const footerText =
+        footerBySlug[slug] ??
+        "Servicio de cerrajería adaptado a viviendas, comercios y consorcios.";
+
+      return (
+        <article
+          class="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/40 p-4 shadow-sm"
         >
-          <!-- Ícono campana -->
-          <svg
-            viewBox="0 0 24 24"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <path
-              d="M12 3a5 5 0 00-5 5v2.586l-.707 2.121A1 1 0 007.243 14H16.757a1 1 0 00.95-1.293L17 10.586V8a5 5 0 00-5-5z"
-              fill="currentColor"
-            />
-            <path
-              d="M9 16a3 3 0 006 0H9z"
-              fill="currentColor"
-              opacity="0.8"
-            />
-          </svg>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
-            Urgencias 24 horas
-          </h3>
-          <p
-            class="text-[0.7rem] font-medium uppercase text-red-300/80 md:text-[0.7rem]"
-          >
-            Servicio especializado
-          </p>
-        </div>
-      </header>
+          {imagen && (
+            <div
+              class="pointer-events-none absolute inset-0"
+              aria-hidden="true"
+            >
+              <img
+                src={imagen}
+                alt={imagenAlt || title}
+                loading="lazy"
+                class="h-full w-full object-cover object-center"
+              />
+              <div
+                class="absolute inset-0 bg-linear-to-br from-slate-950/75 via-slate-950/92 to-slate-950/95
+                         group-hover:from-slate-950/90 group-hover:via-slate-950/90 group-hover:to-slate-950/95
+                         transition-colors duration-200"
+              ></div>
+            </div>
+          )}
 
-      <!-- Descripción mobile -->
-      <p class="text-xs leading-relaxed text-slate-300 md:hidden">
-        Aperturas y soluciones rápidas cuando quedás afuera o la cerradura no
-        responde.
-      </p>
+          <div class="relative z-10 flex flex-1 flex-col justify-between">
+            <header class="mb-2 flex items-center gap-3">
+              <ServiceIcon title={title} />
+              <div>
+                <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
+                  {title}
+                </h3>
+                <p
+                  class={`text-[0.7rem] font-medium uppercase md:text-[0.7rem] ${subClass}`}
+                >
+                  {subheading}
+                </p>
+              </div>
+            </header>
 
-      <!-- Descripción desktop -->
-      <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
-        Apertura de puertas y soluciones rápidas las 24 horas, todos los días.
-        Atendemos emergencias en viviendas, comercios y consorcios. Apertura de
-        puertas sin rotura cuando es posible.
-      </p>
+            {/* Descripción mobile (corta) */}
+            {descripcionCorta && (
+              <p class="text-xs leading-relaxed text-slate-300 md:hidden">
+                {descripcionCorta}
+              </p>
+            )}
 
-      <footer class="mt-3">
-        <span class="text-[0.75rem] text-slate-400">
-          Pensado para personas que quedaron afuera o necesitan atención
-          inmediata.
-        </span>
-      </footer>
-    </article>
+            {/* Descripción desktop (larga si existe, sino la corta) */}
+            <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
+              {descripcionLarga || descripcionCorta}
+            </p>
 
-    <!-- Reparaciones de cerraduras -->
-    <article
-      class="flex h-full flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4 shadow-sm"
-    >
-      <header class="mb-2 flex items-center gap-3">
-        <div
-          class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-sky-900/40 text-sky-200"
-        >
-          <!-- Ícono llave inglesa -->
-          <svg
-            viewBox="0 0 24 24"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <path
-              d="M16.5 3a4 4 0 00-3.997 4.235l-6.39 6.39a2.5 2.5 0 103.535 3.536l6.39-6.39A4 4 0 1016.5 3zm0 2a2 2 0 11-1.414 3.414L13 10.5 11.5 9 14.086 6.414A1.99 1.99 0 0116.5 5z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
-            Reparaciones de cerraduras
-          </h3>
-          <p
-            class="text-[0.7rem] font-medium uppercase text-sky-300/80 md:text-[0.7rem]"
-          >
-            Servicio especializado
-          </p>
-        </div>
-      </header>
-
-      <p class="text-xs leading-relaxed text-slate-300 md:hidden">
-        Reparación o cambio de cerraduras que se traban, giran en falso o
-        quedaron dañadas.
-      </p>
-
-      <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
-        Reparamos cerraduras que se traban, giran en falso o quedaron dañadas.
-        Primero evaluamos si conviene reparar o cambiar el cilindro completo.
-        Trabajamos con puertas de madera, chapa, blindadas y portones de
-        consorcio.
-      </p>
-
-      <footer class="mt-3">
-        <span class="text-[0.75rem] text-slate-400">
-          Ideal cuando la cerradura todavía funciona pero no da seguridad.
-        </span>
-      </footer>
-    </article>
-
-    <!-- Puertas de cristal y frentes vidriados -->
-    <article
-      class="flex h-full flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4 shadow-sm"
-    >
-      <header class="mb-2 flex items-center gap-3">
-        <div
-          class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-cyan-900/40 text-cyan-200"
-        >
-          <!-- Ícono panel vidrio -->
-          <svg
-            viewBox="0 0 24 24"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <rect
-              x="4"
-              y="3"
-              width="16"
-              height="18"
-              rx="2"
-              ry="2"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-            />
-            <path
-              d="M9 3v18M15 3v18"
-              stroke="currentColor"
-              stroke-width="1.6"
-            />
-          </svg>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
-            Puertas de cristal y frentes vidriados
-          </h3>
-          <p
-            class="text-[0.7rem] font-medium uppercase text-cyan-300/80 md:text-[0.7rem]"
-          >
-            Comercios y locales
-          </p>
-        </div>
-      </header>
-
-      <p class="text-xs leading-relaxed text-slate-300 md:hidden">
-        Cerraduras especiales para puertas de cristal y frentes vidriados de
-        locales comerciales.
-      </p>
-
-      <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
-        Instalamos y reparamos cerraduras para puertas de vidrio templado,
-        frentes comerciales y locales a la calle. Ajuste de herrajes,
-        alineación de hojas y cambio de cilindros.
-      </p>
-
-      <footer class="mt-3">
-        <span class="text-[0.75rem] text-slate-400">
-          Pensado para negocios, oficinas y frentes vidriados.
-        </span>
-      </footer>
-    </article>
-
-    <!-- Herrajes y cerraduras -->
-    <article
-      class="flex h-full flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4 shadow-sm"
-    >
-      <header class="mb-2 flex items-center gap-3">
-        <div
-          class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-900/40 text-emerald-200"
-        >
-          <!-- Ícono llave + escudo -->
-          <svg
-            viewBox="0 0 24 24"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <path
-              d="M12 3l6 2v5c0 3.866-2.686 7.227-6 8-3.314-.773-6-4.134-6-8V5l6-2z"
-              fill="currentColor"
-              opacity="0.9"
-            />
-            <path
-              d="M8 16l-2 2-1-1-1 1-1-1 2.5-2.5"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-            />
-          </svg>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
-            Herrajes y cerraduras
-          </h3>
-          <p
-            class="text-[0.7rem] font-medium uppercase text-emerald-300/80 md:text-[0.7rem]"
-          >
-            Refuerzos de seguridad
-          </p>
-        </div>
-      </header>
-
-      <p class="text-xs leading-relaxed text-slate-300 md:hidden">
-        Asesoramiento e instalación de cerraduras, picaportes, cilindros y
-        herrajes adicionales.
-      </p>
-
-      <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
-        Venta e instalación de cerraduras, picaportes, cilindros y herrajes.
-        Podemos asesorarte para mejorar la seguridad de tu casa o local con
-        cerraduras adicionales, cerrojos y barras.
-      </p>
-
-      <footer class="mt-3">
-        <span class="text-[0.75rem] text-slate-400">
-          Útil cuando querés reforzar accesos sin cambiar toda la puerta.
-        </span>
-      </footer>
-    </article>
-
-    <!-- Cierra puertas de piso -->
-    <article
-      class="flex h-full flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4 shadow-sm"
-    >
-      <header class="mb-2 flex items-center gap-3">
-        <div
-          class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-amber-900/40 text-amber-200"
-        >
-          <!-- Ícono cierra puerta -->
-          <svg
-            viewBox="0 0 24 24"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <rect
-              x="4"
-              y="7"
-              width="16"
-              height="2"
-              rx="1"
-              fill="currentColor"
-            />
-            <path
-              d="M6 9v8h3v-5h6v5h3V9"
-              fill="currentColor"
-              opacity="0.85"
-            />
-          </svg>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
-            Cierra puertas de piso
-          </h3>
-          <p
-            class="text-[0.7rem] font-medium uppercase text-amber-300/80 md:text-[0.7rem]"
-          >
-            Edificios y locales
-          </p>
-        </div>
-      </header>
-
-      <p class="text-xs leading-relaxed text-slate-300 md:hidden">
-        Instalación y regulación de cierra puertas para edificios y locales con
-        alto tránsito.
-      </p>
-
-      <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
-        Instalación y regulación de cierra puertas de piso y aéreos. Ajustamos
-        la velocidad de cierre, la fuerza y la posición final para que la hoja
-        no golpee y quede correctamente alineada.
-      </p>
-
-      <footer class="mt-3">
-        <span class="text-[0.75rem] text-slate-400">
-          Recomendado para puertas de acceso principal y pasillos de uso
-          frecuente.
-        </span>
-      </footer>
-    </article>
-
-    <!-- Apertura de vehículos -->
-    <article
-      class="flex h-full flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4 shadow-sm"
-    >
-      <header class="mb-2 flex items-center gap-3">
-        <div
-          class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-900/40 text-indigo-200"
-        >
-          <!-- Ícono auto -->
-          <svg
-            viewBox="0 0 24 24"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <path
-              d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-            />
-            <rect
-              x="4"
-              y="11"
-              width="16"
-              height="6"
-              rx="2"
-              ry="2"
-              fill="currentColor"
-              opacity="0.9"
-            />
-            <circle cx="8" cy="17" r="1.2" fill="#020617" />
-            <circle cx="16" cy="17" r="1.2" fill="#020617" />
-          </svg>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
-            Apertura de vehículos
-          </h3>
-          <p
-            class="text-[0.7rem] font-medium uppercase text-indigo-300/80 md:text-[0.7rem]"
-          >
-            Autos y utilitarios
-          </p>
-        </div>
-      </header>
-
-      <p class="text-xs leading-relaxed text-slate-300 md:hidden">
-        Apertura de autos y utilitarios con llave adentro, sin rotura.
-      </p>
-
-      <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
-        Realizamos apertura de vehículos con técnicas de cerrajería para evitar
-        daños. Es importante indicar modelo, año y zona para confirmar
-        disponibilidad del servicio.
-      </p>
-
-      <footer class="mt-3">
-        <span class="text-[0.75rem] text-slate-400">
-          Para aperturas sin rotura en vía pública, garages o cocheras.
-        </span>
-      </footer>
-    </article>
+            <footer class="mt-3">
+              <span class="text-[0.75rem] text-slate-400">
+                {footerText}
+              </span>
+            </footer>
+          </div>
+        </article>
+      );
+    })}
   </div>
 </section>

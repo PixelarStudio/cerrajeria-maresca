@@ -5,17 +5,26 @@ interface Props {
 
 const { title } = Astro.props as Props;
 
+// Normalizamos el título a minúsculas para matchear
 const t = title.toLowerCase();
 
-let variant: "urgencias" | "reparaciones" | "cristal" | "herrajes" | "cierrapuertas" | "vehiculos" | "default" =
-  "default";
+// Variantes posibles según el tipo de servicio
+let variant:
+  | "urgencias"
+  | "reparaciones"
+  | "cristal"
+  | "herrajes"
+  | "cierrapuertas"
+  | "vehiculos"
+  | "default" = "default";
 
 if (t.includes("urgencias")) variant = "urgencias";
 else if (t.includes("reparaciones")) variant = "reparaciones";
 else if (t.includes("cristal") || t.includes("vidriados")) variant = "cristal";
 else if (t.includes("herrajes") || t.includes("cerraduras")) variant = "herrajes";
 else if (t.includes("cierra puertas")) variant = "cierrapuertas";
-else if (t.includes("vehículos") || t.includes("vehiculos") || t.includes("auto")) variant = "vehiculos";
+else if (t.includes("vehículos") || t.includes("vehiculos") || t.includes("auto"))
+  variant = "vehiculos";
 
 const baseClasses =
   "inline-flex h-9 w-9 items-center justify-center rounded-xl border text-sm";
@@ -41,7 +50,7 @@ const variantClasses =
     <!-- Sirena de emergencia -->
     <svg
       viewBox="0 0 24 24"
-      class="h-25 w-25"
+      class="h-35 w-35"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
@@ -62,7 +71,7 @@ const variantClasses =
     <!-- Cerradura con llave inglesa -->
     <svg
       viewBox="0 0 24 24"
-      class="h-25 w-25"
+      class="h-35 w-35"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
@@ -84,7 +93,7 @@ const variantClasses =
     <!-- Panel de vidrio / frente -->
     <svg
       viewBox="0 0 24 24"
-      class="h-25 w-25"
+      class="h-35 w-35"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
@@ -92,7 +101,7 @@ const variantClasses =
       stroke-linejoin="round"
     >
       <rect x="5" y="4" width="14" height="16" rx="1.8" />
-      <!-- reflejo -->
+      <!-- reflejos -->
       <path d="M9 5.5 15 11" />
       <path d="M10 13.5 14 17.5" />
     </svg>
@@ -102,7 +111,7 @@ const variantClasses =
     <!-- Cilindro + llave -->
     <svg
       viewBox="0 0 24 24"
-      class="h-25 w-25"
+      class="h-35 w-35"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
@@ -124,7 +133,7 @@ const variantClasses =
     <!-- Puerta lateral con brazo de cierrapuertas -->
     <svg
       viewBox="0 0 24 24"
-      class="h-25 w-25"
+      class="h-35 w-35"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
@@ -147,7 +156,7 @@ const variantClasses =
     <!-- Auto con llave -->
     <svg
       viewBox="0 0 24 24"
-      class="h-25 w-25"
+      class="h-35 w-35"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
@@ -170,7 +179,7 @@ const variantClasses =
     <!-- Icono neutro -->
     <svg
       viewBox="0 0 24 24"
-      class="h-15 w-15"
+      class="h-24 w-24"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"

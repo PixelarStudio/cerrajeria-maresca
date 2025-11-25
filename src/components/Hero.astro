@@ -4,6 +4,8 @@ import AtencionInmediataCard from "./AtencionInmediataCard.jsx";
 const telefonoPrincipal = "15-6218-1863";
 const telefonoPrincipalLink = telefonoPrincipal.replace(/[^0-9]/g, "");
 
+// Podés usar .env si querés:
+// const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "5491162181863";
 const whatsappNumber = "5491162181863";
 ---
 
@@ -14,13 +16,13 @@ const whatsappNumber = "5491162181863";
   <div
     class="mx-auto grid max-w-6xl gap-8 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:items-start"
   >
-    <!-- Columna izquierda: mensaje principal -->
+    <!-- COLUMNA IZQUIERDA: TEXTO PRINCIPAL -->
     <div class="space-y-6">
       <div class="flex flex-wrap gap-2 text-xs font-semibold">
         <span
           class="inline-flex items-center rounded-full bg-red-800/70 px-3 py-1 text-[0.7rem] uppercase tracking-wide text-slate-50"
         >
-          Cerrajería Cerca tuyo
+          Cerrajería Maresca
         </span>
         <span
           class="inline-flex items-center rounded-full bg-slate-900/80 px-3 py-1 text-[0.7rem] uppercase tracking-wide text-slate-200"
@@ -30,37 +32,42 @@ const whatsappNumber = "5491162181863";
       </div>
 
       <div class="space-y-4">
-  <h1
-    class="text-3xl font-semibold leading-tight tracking-tight text-slate-50 md:text-4xl lg:text-[2.6rem]"
-  >
-    Cerrajería Maresca,
-    <br class="hidden md:block" />
-    guardia 24 horas en La Boca.
-  </h1>
+        <h1
+          class="text-3xl font-semibold leading-tight tracking-tight text-slate-50 md:text-4xl lg:text-[2.6rem]"
+        >
+          Cerrajería Maresca,
+          <br class="hidden md:block" />
+          guardia 24 horas en La Boca.
+        </h1>
 
-  {/** Versión mobile: copy corto y directo */ }
-  <p class="max-w-xl text-sm leading-relaxed text-slate-200 md:hidden">
-    Apertura de puertas, reparación de cerraduras y apertura de vehículos en
-    La Boca y alrededores. Atención todos los días, las 24 horas.
-  </p>
+        {/** MOBILE: copy corto y directo */ }
+        <p class="max-w-xl text-sm leading-relaxed text-slate-200 md:hidden">
+          Apertura de puertas, reparación de cerraduras y apertura de vehículos
+          en La Boca y alrededores. Atención todos los días, las 24 horas.
+        </p>
 
-  {/** Versión desktop: texto completo pero sin repetir todo */ }
-  <p
-    class="hidden max-w-xl text-sm leading-relaxed text-slate-200 md:block md:text-[0.95rem]"
-  >
-    Local a la calle en Palos 721, Local 7. Trabajamos en viviendas, comercios
-    y consorcios: aperturas sin rotura cuando es posible, reparación y recambio
-    de cerraduras, puertas de cristal y frentes vidriados, cierra puertas de
-    piso y apertura de vehículos.
-  </p>
+        {/** DESKTOP: texto más completo */ }
+        <p
+          class="hidden max-w-xl text-sm leading-relaxed text-slate-200 md:block md:text-[0.95rem]"
+        >
+          Local a la calle en Palos 721, Local 7. Trabajamos en viviendas,
+          comercios y consorcios: aperturas sin rotura cuando es posible,
+          reparación y recambio de cerraduras, puertas de cristal y frentes
+          vidriados, cierra puertas de piso y apertura de vehículos.
+        </p>
 
-  {/** Bullets solo en desktop: complementan, no repiten el párrafo */ }
-  <ul class="hidden space-y-1.5 text-[0.9rem] text-slate-200 md:block">
-    <li>• Respuesta prioritaria en urgencias (personas afuera, llaves adentro).</li>
-    <li>• Podés enviar fotos por WhatsApp para cotizar mejor el trabajo.</li>
-    <li>• Cobertura en La Boca y barrios cercanos, según disponibilidad.</li>
-  </ul>
-</div>
+        {/** Bullets solo en desktop: complementan, no repiten */ }
+        <ul class="hidden space-y-1.5 text-[0.9rem] text-slate-200 md:block">
+          <li>
+            • Respuesta prioritaria en urgencias (personas afuera, llaves
+            adentro).
+          </li>
+          <li>• Podés enviar fotos por WhatsApp para cotizar mejor el trabajo.</li>
+          <li>
+            • Cobertura en La Boca y barrios cercanos, según disponibilidad.
+          </li>
+        </ul>
+      </div>
 
       <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
         <a
@@ -84,8 +91,8 @@ const whatsappNumber = "5491162181863";
       </p>
     </div>
 
-    <!-- Columna derecha: wizard de WhatsApp -->
-    <div class="flex items-stretch justify-end md:justify-center">
+    <!-- COLUMNA DERECHA: ATENCIÓN INMEDIATA SOLO EN DESKTOP -->
+    <div class="hidden md:flex items-stretch justify-end md:justify-center">
       <AtencionInmediataCard client:load whatsappNumber={whatsappNumber} />
     </div>
   </div>

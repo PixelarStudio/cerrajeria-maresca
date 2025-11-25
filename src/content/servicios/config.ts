@@ -9,7 +9,9 @@ const serviciosCollection = defineCollection({
     orden: z.number().default(0),
     descripcionCorta: z.string(),
     descripcionLarga: z.string().optional(),
-    icon: z.string().optional(), // para futuro (svg, emoji, etc.)
+    icon: z.string().optional(), // si querés mantenerlo
+    imagen: z.string().optional(), // ej: "/images/servicios/apertura-puertas.jpg"
+    imagenAlt: z.string().optional(),
   }),
 });
 
