@@ -55,15 +55,62 @@ const {
       <slot />
     </main>
 
-    <footer class="border-t border-slate-900 bg-slate-950/95">
-      <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-xs text-slate-400 md:flex-row md:items-center md:justify-between">
-        <p>
-          © {new Date().getFullYear()} Cerrajería Maresca · Palos 721, Local 7, La Boca
+<footer class="border-t border-slate-900 bg-slate-950/95">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 text-xs text-slate-300 md:flex-row md:items-center md:justify-between"
+  >
+    {/* Lado izquierdo: igual al nav */}
+    <div class="flex items-center gap-3">
+      <div
+        class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-red-700 text-[0.8rem] font-semibold text-slate-50 shadow-sm"
+      >
+        CM
+      </div>
+      <div class="leading-tight">
+        <p class="text-xs font-semibold text-slate-100">
+          Cerrajería Maresca
         </p>
-        <p>
-          Urgencias, reparaciones, puertas de cristal, herrajes y cerraduras, apertura de vehículos.
+        <p class="text-[0.7rem] text-slate-400">
+          Urgencias 24 horas · La Boca
         </p>
       </div>
-    </footer>
+    </div>
+
+    {/* Lado derecho: igual al nav + pequeño ajuste */}
+    <div class="text-right leading-tight">
+      <p class="text-[0.7rem] font-semibold text-slate-200">
+        Atención 24 horas
+      </p>
+      <p class="text-[0.7rem] text-slate-400">
+        Tel: 15-6218-1863 · 15-3316-4381
+      </p>
+    </div>
+  </div>
+
+  {/* Franja inferior fina con servicios + crédito Studio Pixelar */}
+  <div class="border-t border-slate-900/80">
+    <div
+      class="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 text-[0.7rem] text-slate-500 md:flex-row md:items-center md:justify-between"
+    >
+      <p>
+        © {new Date().getFullYear()} Cerrajería Maresca · Urgencias, reparaciones,
+        puertas de cristal, herrajes y cerraduras, apertura de vehículos.
+      </p>
+      <p>
+        Sitio diseñado y desarrollado por{" "}
+        <a
+          href="https://studiopixelar.com"
+          target="_blank"
+          rel="noreferrer"
+          class="font-medium text-slate-300 hover:text-amber-300"
+        >
+          Studio Pixelar
+        </a>
+        .
+      </p>
+    </div>
+  </div>
+</footer>
+
   </body>
 </html>

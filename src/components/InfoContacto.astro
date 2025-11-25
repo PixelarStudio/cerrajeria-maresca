@@ -1,98 +1,240 @@
 ---
 const telefono1 = "15-6218-1863";
 const telefono2 = "15-3316-4381";
-const direccion = "Palos 721, Local 7, La Boca, CABA";
-const email = "cerrajeriamaresca@hotmail.com"; // corregí a mano; ajustá según tarjeta real
+
+const telefono1Link = telefono1.replace(/[^0-9]/g, "");
+const telefono2Link = telefono2.replace(/[^0-9]/g, "");
+const mapsQuery = encodeURIComponent("Palos 721, La Boca, Buenos Aires");
 ---
 
-<section
-  aria-labelledby="contacto-title"
-  class="mb-4 grid gap-6 rounded-2xl border border-slate-800 bg-slate-900/60 p-5 md:grid-cols-[2fr,1.4fr]"
->
-  <div>
-    <h2
-      id="contacto-title"
-      class="text-xl font-semibold tracking-tight md:text-2xl"
-    >
+<section id="contacto" class="mb-16 scroll-mt-24">
+  {/* Encabezado */}
+  <div class="mb-6 flex flex-col gap-2">
+    <h2 class="text-xl font-semibold text-slate-50 md:text-2xl">
       Datos de contacto
     </h2>
-    <p class="mt-1 text-xs text-slate-300 md:text-sm">
-      Podés acercarte al local, llamarnos o escribirnos por WhatsApp las 24
-      horas.
+    <p class="max-w-2xl text-sm text-slate-300">
+      Podés acercarte al local, llamarnos o escribirnos por WhatsApp. La
+      guardia de cerrajería atiende urgencias todos los días.
     </p>
-
-    <dl class="mt-4 space-y-3 text-sm">
-      <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-        <dt class="w-28 text-slate-400">Teléfonos</dt>
-        <dd class="space-y-1">
-          <a
-            href={`tel:${telefono1.replace(/[^0-9]/g, "")}`}
-            class="block text-slate-50 underline-offset-2 hover:underline"
-          >
-            {telefono1}
-          </a>
-          <a
-            href={`tel:${telefono2.replace(/[^0-9]/g, "")}`}
-            class="block text-slate-50 underline-offset-2 hover:underline"
-          >
-            {telefono2}
-          </a>
-        </dd>
-      </div>
-
-      <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-        <dt class="w-28 text-slate-400">Dirección</dt>
-        <dd class="text-slate-50">{direccion}</dd>
-      </div>
-
-      <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-        <dt class="w-28 text-slate-400">Correo</dt>
-        <dd>
-          <a
-            href={`mailto:${email}`}
-            class="text-slate-50 underline-offset-2 hover:underline"
-          >
-            {email}
-          </a>
-        </dd>
-      </div>
-
-      <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-        <dt class="w-28 text-slate-400">Redes</dt>
-        <dd class="flex flex-wrap gap-2 text-xs">
-          <a
-            href="https://www.instagram.com/cerrajeria_maresca"
-            target="_blank"
-            rel="noreferrer"
-            class="rounded-full bg-slate-800 px-2 py-1 hover:bg-slate-700"
-          >
-            Instagram
-          </a>
-          <a
-            href="https://www.facebook.com/CerrajeriaMaresca"
-            target="_blank"
-            rel="noreferrer"
-            class="rounded-full bg-slate-800 px-2 py-1 hover:bg-slate-700"
-          >
-            Facebook
-          </a>
-        </dd>
-      </div>
-    </dl>
   </div>
 
-  <div class="space-y-3 text-xs text-slate-300">
-    <h3 class="text-sm font-semibold text-slate-50">
-      ¿En qué zonas trabajamos?
-    </h3>
-    <p>
-      Local en La Boca y atención habitual en barrios cercanos de CABA y zona
-      sur según disponibilidad. Para otras zonas, consultanos por WhatsApp
-      indicando dirección y tipo de trabajo.
-    </p>
-    <p>
-      Para urgencias, indicá si se trata de vivienda, comercio o vehículo y si
-      hay menores o personas mayores involucradas. Eso nos ayuda a priorizar.
-    </p>
+  {/* Card principal de contacto */}
+  <div
+    class="relative overflow-hidden rounded-3xl border border-amber-500/25 bg-[radial-gradient(circle_at_top,_#7c2d12_0,_#020617_55%,_#020617_100%)] p-5 shadow-xl md:p-7"
+  >
+    {/* Halo suave de fondo */}
+    <div class="pointer-events-none absolute inset-0 opacity-40">
+      <div class="absolute -left-10 top-0 h-40 w-40 rounded-full bg-amber-500/20 blur-3xl"></div>
+      <div class="absolute -right-16 bottom-0 h-40 w-40 rounded-full bg-red-500/15 blur-3xl"></div>
+    </div>
+
+    <div
+      class="relative grid gap-6 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]"
+    >
+      {/* Columna izquierda: contacto rápido + datos duros */}
+      <div class="space-y-5">
+        {/* Faja de guardia */}
+        <div class="inline-flex items-center gap-2 rounded-full bg-slate-950/70 px-3 py-1 text-[0.75rem] text-slate-200 ring-1 ring-slate-800">
+          <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+          Guardia de cerrajería · Urgencias sin turno
+        </div>
+
+        {/* Contacto rápido */}
+        <div
+          class="rounded-2xl border border-slate-800 bg-slate-950/70 p-4 sm:flex sm:items-center sm:justify-between sm:gap-4"
+        >
+          <div>
+            <p class="text-[0.8rem] font-medium uppercase tracking-wide text-amber-300">
+              Teléfono de guardia
+            </p>
+            <p class="mt-1 text-lg font-semibold text-slate-50">
+              {telefono1}
+            </p>
+            <p class="mt-1 text-[0.8rem] text-slate-300">
+              Llamadas y WhatsApp. Prioridad para personas afuera o puertas
+              trabadas.
+            </p>
+          </div>
+          <div class="mt-3 flex flex-col gap-2 sm:mt-0">
+            <a
+              href={`tel:${telefono1Link}`}
+              class="inline-flex items-center justify-center rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-md hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            >
+              Llamar ahora
+            </a>
+            <a
+              href={`https://wa.me/54${telefono1Link}`}
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center justify-center rounded-full border border-amber-400/80 px-4 py-2 text-sm font-semibold text-amber-200 hover:bg-amber-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            >
+              Escribir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        {/* Teléfonos, dirección, mail, redes */}
+        <div class="grid gap-4 text-sm text-slate-200 sm:grid-cols-2">
+          <div class="space-y-3">
+            <div>
+              <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+                Teléfonos
+              </h3>
+              <ul class="mt-1 space-y-1 text-sm">
+                <li>
+                  <a
+                    href={`tel:${telefono1Link}`}
+                    class="hover:text-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                  >
+                    {telefono1} (guardia)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`tel:${telefono2Link}`}
+                    class="hover:text-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                  >
+                    {telefono2} (línea alternativa)
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+                Correo
+              </h3>
+              <p class="mt-1">
+                <a
+                  href="mailto:cerrajeriammaresca@hotmail.com"
+                  class="break-all hover:text-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                >
+                  cerrajeriammaresca@hotmail.com
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+                Dirección del local
+              </h3>
+              <p class="mt-1 text-sm text-slate-200">
+                Palos 721, Local 7 · La Boca, CABA
+              </p>
+              <p class="mt-1 text-[0.8rem] text-slate-400">
+                Local a la calle, a metros de la Av. Almirante Brown. Consultá
+                por disponibilidad antes de acercarte.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+                Redes
+              </h3>
+              <div class="mt-2 flex flex-wrap gap-2 text-sm">
+                <a
+                  href="https://www.instagram.com/cerrajeria_maresca"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="rounded-full border border-slate-700 px-3 py-1 text-slate-200 hover:border-amber-400 hover:text-amber-300"
+                >
+                  Instagram
+                </a>
+                <a
+                  href="https://www.facebook.com/cerrajeriammaresca"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="rounded-full border border-slate-700 px-3 py-1 text-slate-200 hover:border-amber-400 hover:text-amber-300"
+                >
+                  Facebook
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Columna derecha: cómo trabajamos + zona de cobertura */}
+      <div
+        class="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/70 p-4 text-sm text-slate-200 md:p-5"
+      >
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+            ¿Cómo trabajamos?
+          </h3>
+          <ul class="mt-2 space-y-1.5 text-[0.85rem] text-slate-300">
+            <li>• Urgencias de cerrajería sin turno previo.</li>
+            <li>
+              • Consultas y presupuestos por WhatsApp con fotos de la puerta o
+              la cerradura.
+            </li>
+            <li>
+              • Trabajos en viviendas, comercios y consorcios (cerraduras,
+              herrajes, frentes vidriados, vehículos).
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+            Zona de cobertura
+          </h3>
+          <p class="mt-2 text-[0.85rem] text-slate-300">
+            Local a la calle en La Boca, con atención en barrios cercanos de
+            CABA y zona sur según disponibilidad.
+          </p>
+          <p class="mt-1 text-[0.8rem] text-slate-400">
+            Para urgencias, indicá siempre barrio y tipo de vivienda o comercio
+            al iniciar la consulta por WhatsApp.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Mapa de ubicación */}
+  <div class="mt-8 space-y-3">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h3 class="text-sm font-semibold text-slate-100 md:text-base">
+          Mapa de ubicación
+        </h3>
+        <p class="text-[0.85rem] text-slate-300">
+          Local sobre la calle Palos, en La Boca. Abrí el mapa para ver cómo
+          llegar desde tu ubicación.
+        </p>
+      </div>
+      <a
+        href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`}
+        target="_blank"
+        rel="noreferrer"
+        class="inline-flex items-center gap-1 rounded-full border border-amber-400/80 px-3 py-1.5 text-[0.8rem] font-medium text-amber-200 hover:bg-amber-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+      >
+        Abrir en Google Maps
+      </a>
+    </div>
+
+    <div
+      class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70"
+    >
+      <div
+        class="flex items-center justify-between border-b border-slate-800 bg-slate-950/80 px-3 py-2 text-[0.8rem] text-slate-300"
+      >
+        <span>Palos 721, Local 7 · La Boca</span>
+        <span class="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[0.7rem] text-emerald-200">
+          Cómo llegar
+        </span>
+      </div>
+      <iframe
+        title="Mapa de ubicación de Cerrajería Maresca"
+        src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="h-64 w-full md:h-80"
+      ></iframe>
+    </div>
   </div>
 </section>
