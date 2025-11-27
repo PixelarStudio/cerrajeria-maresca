@@ -31,11 +31,10 @@ const telefonoPrincipalLink = telefonoPrincipal.replace(/[^0-9]/g, "");
           class="flex h-40 w-40 flex-col items-center justify-center rounded-3xl bg-slate-950/90 shadow-xl shadow-black/60 ring-1 ring-maresca-500/70"
         >
           <div class="grid h-20 w-20 grid-cols-4 gap-1.5">
-            {cells.map((_, idx) => (
+            {cells.map(() => (
               <span
                 class="rounded-md bg-marine-500/80"
                 aria-hidden="true"
-                key={idx}
               ></span>
             ))}
           </div>
