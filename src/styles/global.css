@@ -1,1 +1,32 @@
+/* src/styles/global.css */
 @import "tailwindcss";
+
+@theme {
+  --color-maresca-300: #EA5529;
+  --color-maresca-400: #EE7754;
+  --color-maresca-500: #EA5529;
+  --color-maresca-600: #C74823;
+  --color-maresca-700: #A43B1D;
+
+  --color-marine-300: #9496B2;
+  --color-marine-500: #292E65;
+  --color-marine-600: #212551;
+  --color-marine-700: #191C3D;
+
+  --color-bg-soft: #FBDDD4;
+}
+
+/* Ahora el body ya no es blanco, es naranja con un leve degradado */
+body {
+  @apply min-h-screen bg-linear-to-b from-maresca-500 via-maresca-500 to-maresca-600 text-slate-50 antialiased;
+}
+
+/* Links base (blanco sobre fondo naranja – los de contenido los vamos a usar dentro de cards) */
+a {
+  @apply text-white underline-offset-2;
+}
+
+a:hover {
+  @apply text-maresca-300;
+}
+

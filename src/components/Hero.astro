@@ -1,26 +1,26 @@
 ---
 import AtencionInmediataCard from "./AtencionInmediataCard.jsx";
 
-const telefonoPrincipal = "15-6218-1863";
+const telefonoPrincipal = "11-3316-4381";
 const telefonoPrincipalLink = telefonoPrincipal.replace(/[^0-9]/g, "");
 
 // Podés usar .env si querés:
 // const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "5491162181863";
-const whatsappNumber = "5491162181863";
+const whatsappNumber = "5491133164381";
 ---
 
 <section
   id="inicio"
-  class="mb-14 rounded-[28px] border border-orange-900/40 bg-[radial-gradient(circle_at_top,#7c2d12_0,#020617_52%,#020617_100%)] px-5 py-8 shadow-[0_0_0_1px_rgba(15,23,42,0.8),0_40px_120px_rgba(0,0,0,0.85)] md:px-10 md:py-10"
+  class="mb-14 rounded-[28px] border border-orange-900/40 bg-[radial-gradient(circle_at_top,#292E65_0,#191C3D_52%,#020617_100%)] px-5 py-8 shadow-[0_0_0_1px_rgba(15,23,42,0.8),0_20px_100px_rgba(0,0,0,0.65)] md:px-10 md:py-10"
 >
   <div
     class="mx-auto grid max-w-6xl gap-8 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:items-start"
   >
-    <!-- COLUMNA IZQUIERDA: TEXTO PRINCIPAL -->
+    {/* COLUMNA IZQUIERDA: TEXTO PRINCIPAL */}
     <div class="space-y-6">
       <div class="flex flex-wrap gap-2 text-xs font-semibold">
         <span
-          class="inline-flex items-center rounded-full bg-red-800/70 px-3 py-1 text-[0.7rem] uppercase tracking-wide text-slate-50"
+          class="inline-flex items-center rounded-full bg-red-200/70 px-3 py-1 text-[0.7rem] uppercase tracking-wide text-slate-50"
         >
           Cerrajería Maresca
         </span>
@@ -40,13 +40,13 @@ const whatsappNumber = "5491162181863";
           guardia 24 horas en La Boca.
         </h1>
 
-        {/** MOBILE: copy corto y directo */ }
+        {/* MOBILE: copy corto y directo */}
         <p class="max-w-xl text-sm leading-relaxed text-slate-200 md:hidden">
           Apertura de puertas, reparación de cerraduras y apertura de vehículos
           en La Boca y alrededores. Atención todos los días, las 24 horas.
         </p>
 
-        {/** DESKTOP: texto más completo */ }
+        {/* DESKTOP: texto más completo */}
         <p
           class="hidden max-w-xl text-sm leading-relaxed text-slate-200 md:block md:text-[0.95rem]"
         >
@@ -56,7 +56,7 @@ const whatsappNumber = "5491162181863";
           vidriados, cierra puertas de piso y apertura de vehículos.
         </p>
 
-        {/** Bullets solo en desktop: complementan, no repiten */ }
+        {/* Bullets solo en desktop */}
         <ul class="hidden space-y-1.5 text-[0.9rem] text-slate-200 md:block">
           <li>
             • Respuesta prioritaria en urgencias (personas afuera, llaves
@@ -69,17 +69,20 @@ const whatsappNumber = "5491162181863";
         </ul>
       </div>
 
+      {/* CTAs */}
       <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+        {/* BOTÓN PRINCIPAL: LLAMAR */}
         <a
           href={`tel:${telefonoPrincipalLink}`}
-          class="inline-flex min-w-[220px] items-center justify-center rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-500/25 transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+          class="inline-flex min-w-[220px] items-center justify-center rounded-full bg-maresca-600 px-5 py-2.5 text-sm font-semibold text-slate-50 shadow-lg shadow-black/40 transition hover:bg-maresca-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maresca-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
         >
           Llamar ahora · {telefonoPrincipal}
         </a>
 
+        {/* BOTÓN SECUNDARIO: VER SERVICIOS */}
         <a
           href="#servicios"
-          class="inline-flex min-w-[220px] items-center justify-center rounded-full border border-emerald-500/70 bg-slate-950/70 px-5 py-2.5 text-sm font-semibold text-emerald-200 shadow-sm transition hover:border-emerald-400 hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+          class="inline-flex min-w-[220px] items-center justify-center rounded-full border border-amber-300/80 bg-slate-950/70 px-5 py-2.5 text-sm font-semibold text-amber-100 shadow-sm transition hover:border-amber-200 hover:bg-slate-900 hover:text-amber-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
         >
           Ver trabajos que hacemos
         </a>
@@ -91,7 +94,7 @@ const whatsappNumber = "5491162181863";
       </p>
     </div>
 
-    <!-- COLUMNA DERECHA: ATENCIÓN INMEDIATA SOLO EN DESKTOP -->
+    {/* COLUMNA DERECHA: ATENCIÓN INMEDIATA SOLO EN DESKTOP */}
     <div class="hidden md:flex items-stretch justify-end md:justify-center">
       <AtencionInmediataCard client:load whatsappNumber={whatsappNumber} />
     </div>

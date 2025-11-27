@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Página no encontrada | Cerrajería Maresca";
+const description =
+  "La página que estás buscando no existe. Volvé al inicio de Cerrajería Maresca para ver servicios y contacto.";
+const path = "/404";
+---
+
+<BaseLayout {title} {description} {path} index={false}>
+  <main class="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center gap-4 px-4 text-center">
+    <p class="text-sm font-semibold text-amber-400">Error 404</p>
+    <h1 class="text-2xl font-semibold text-zinc-50">
+      No encontramos la página que buscás.
+    </h1>
+    <p class="max-w-md text-sm text-zinc-300">
+      Puede que el enlace esté mal escrito o que la sección haya cambiado. Te
+      invitamos a volver al inicio para ver los servicios de la cerrajería y
+      los datos de contacto.
+    </p>
+    <a
+      href="/"
+      class="mt-2 inline-flex items-center justify-center rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+    >
+      Volver al inicio
+    </a>
+  </main>
+</BaseLayout>

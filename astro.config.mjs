@@ -6,9 +6,13 @@ import tailwindcss from '@tailwindcss/vite';
 
 import vercel from '@astrojs/vercel';
 
+import markdoc from '@astrojs/markdoc';
+import partytown from '@astrojs/partytown';
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  integrations: [react(), markdoc(), partytown(), sitemap()],
 
   vite: {
     plugins: [tailwindcss()]
@@ -16,3 +20,4 @@ export default defineConfig({
 
   adapter: vercel()
 });
+

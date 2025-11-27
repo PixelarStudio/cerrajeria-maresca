@@ -1,0 +1,68 @@
+    <footer class="mt-10 border-t border-[#13234A]/80 bg-[#13234A]/95 text-slate-200">
+      {/* Fila principal: logo + info de contacto */}
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between"
+      >
+        {/* Lado izquierdo: logo + nombre */}
+        <div class="flex items-center gap-3">
+          {/* Logo sin fondo naranja, sólo borde sutil */}
+          <div
+            class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-transparent ring-1 ring-slate-700/60"
+          >
+            <img
+              src="/images/logo-cm.png"
+              alt="Logo de Cerrajería Maresca"
+              class="h-10 w-10 object-contain"
+              width="48"
+              height="48"
+              loading="lazy"
+            />
+          </div>
+          <div class="leading-tight">
+            <p class="text-sm font-semibold text-slate-50">
+              Cerrajería Maresca · La Boca
+            </p>
+            <p class="text-[0.75rem] text-slate-300">
+              Urgencias 24 horas · Tel: 11-3316-4381 · 11-6218-1863
+            </p>
+          </div>
+        </div>
+
+        {/* Lado derecho: dirección + correo */}
+        <div class="text-left text-[0.75rem] text-slate-300 md:text-right">
+          <p>Palos 721, Local 7 · La Boca, CABA</p>
+          <p class="mt-1">
+            <a
+              href="mailto:cerrajeriamaresca@hotmail.com"
+              class="hover:text-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#13234A]"
+            >
+              cerrajeriamaresca@hotmail.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+      {/* Fila inferior: servicios + crédito Studio Pixelar */}
+      <div class="border-t border-slate-800/80 bg-[#0B1023]/95">
+        <div
+          class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 text-[0.75rem] text-slate-400 md:flex-row md:items-center md:justify-between"
+        >
+          <p>
+            © {new Date().getFullYear()} Cerrajería Maresca. Urgencias, reparaciones,
+            puertas de cristal, herrajes y cerraduras, apertura de vehículos.
+          </p>
+          <p class="flex flex-wrap items-center gap-1">
+            Sitio diseñado y desarrollado por
+            <a
+              href="https://studiopixelar.com"
+              target="_blank"
+              rel="noreferrer"
+              class="font-medium text-slate-200 hover:text-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1023]"
+            >
+              Studio Pixelar
+            </a>
+            .
+          </p>
+        </div>
+      </div>
+    </footer>

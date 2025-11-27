@@ -1,13 +1,18 @@
 ---
-const telefono1 = "15-6218-1863";
-const telefono2 = "15-3316-4381";
+const telefonoPrincipal = "11-3316-4381"; // PRIORIDAD
+const telefonoGuardia = "11-6218-1863";   // Queda como guardia
+const telefonoLinea = "4894-0003";
 
-const telefono1Link = telefono1.replace(/[^0-9]/g, "");
-const telefono2Link = telefono2.replace(/[^0-9]/g, "");
+const principalLink = telefonoPrincipal.replace(/[^0-9]/g, "");
+const guardiaLink = telefonoGuardia.replace(/[^0-9]/g, "");
+const lineaLink = telefonoLinea.replace(/[^0-9]/g, "");
+
 const mapsQuery = encodeURIComponent("Palos 721, La Boca, Buenos Aires");
+
+const logoSrc = "/images/logo-cm.png";
 ---
 
-<section id="contacto" class="mb-16 scroll-mt-24">
+<section id="contacto" class="mb-16 scroll-mt-24 ">
   {/* Encabezado */}
   <div class="mb-6 flex flex-col gap-2">
     <h2 class="text-xl font-semibold text-slate-50 md:text-2xl">
@@ -21,7 +26,7 @@ const mapsQuery = encodeURIComponent("Palos 721, La Boca, Buenos Aires");
 
   {/* Card principal de contacto */}
   <div
-    class="relative overflow-hidden rounded-3xl border border-amber-500/25 bg-[radial-gradient(circle_at_top,#7c2d12_0,#020617_52%,#020617_100%)] p-5 shadow-xl md:p-7"
+    class="relative overflow-hidden rounded-3xl border border-amber-500/25 bg-[radial-gradient(circle_at_top,#A43B1D_0,#292E65_52%,#A43B1D_100%)] p-5 shadow-xl md:p-7"
   >
     {/* Halo suave de fondo */}
     <div class="pointer-events-none absolute inset-0 opacity-40">
@@ -32,82 +37,157 @@ const mapsQuery = encodeURIComponent("Palos 721, La Boca, Buenos Aires");
     <div
       class="relative grid gap-6 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]"
     >
-      {/* Columna izquierda: contacto rápido + datos duros */}
+      {/* Columna izquierda: marca + contacto rápido + datos duros */}
       <div class="space-y-5">
+        {/* Bloque de marca con logo */}
+        <div class="flex items-center gap-4">
+          <div
+            class="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-slate-950/80 shadow-lg ring-1 ring-amber-500/40"
+          >
+            <img
+              src={logoSrc}
+              alt="Logo de Cerrajería Maresca"
+              class="h-20 w-20 object-contain"
+              width="80"
+              height="80"
+              loading="lazy"
+            />
+          </div>
+          <div class="space-y-1">
+            <p class="text-sm font-semibold text-slate-50">
+              Cerrajería Maresca · La Boca
+            </p>
+            <p class="text-[0.8rem] text-slate-200">
+              Aperturas, urgencias, puertas de cristal y vehículos.
+            </p>
+            <p class="text-[0.75rem] text-amber-200">
+              Palos 721, Local 7 · La Boca, CABA
+            </p>
+          </div>
+        </div>
+
         {/* Faja de guardia */}
-        <div class="inline-flex items-center gap-2 rounded-full bg-slate-950/70 px-3 py-1 text-[0.75rem] text-slate-200 ring-1 ring-slate-800">
+        <div
+          class="inline-flex items-center gap-2 rounded-full bg-slate-950/70 px-3 py-1 text-[0.75rem] text-slate-200 ring-1 ring-slate-800"
+        >
           <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
           Guardia de cerrajería · Urgencias sin turno
         </div>
 
-        {/* Contacto rápido */}
+        {/* Contacto rápido: 2 tarjetas, priorizando el número principal */}
         <div
-          class="rounded-2xl border border-slate-800 bg-slate-950/70 p-4 sm:flex sm:items-center sm:justify-between sm:gap-4"
+          class="rounded-2xl border border-slate-800 bg-slate-950/70 p-4"
         >
-          <div>
-            <p class="text-[0.8rem] font-medium uppercase tracking-wide text-amber-300">
-              Teléfono de guardia
-            </p>
-            <p class="mt-1 text-lg font-semibold text-slate-50">
-              {telefono1}
-            </p>
-            <p class="mt-1 text-[0.8rem] text-slate-300">
-              Llamadas y WhatsApp. Prioridad para personas afuera o puertas
-              trabadas.
-            </p>
-          </div>
-          <div class="mt-3 flex flex-col gap-2 sm:mt-0">
-            <a
-              href={`tel:${telefono1Link}`}
-              class="inline-flex items-center justify-center rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-md hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          <p
+            class="text-center text-[0.8rem] font-medium uppercase tracking-wide text-amber-300"
+          >
+            Teléfonos de contacto y guardia
+          </p>
+
+          <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            {/* Número PRINCIPAL */}
+            <div
+              class="flex flex-col items-center gap-2 rounded-xl bg-slate-950/90 p-3 text-center ring-1 ring-amber-400/60"
             >
-              Llamar ahora
-            </a>
-            <a
-              href={`https://wa.me/54${telefono1Link}`}
-              target="_blank"
-              rel="noreferrer"
-              class="inline-flex items-center text-center justify-center rounded-full border border-amber-400/80 px-6 py-2 text-sm font-semibold text-amber-200 hover:bg-amber-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              <p
+                class="text-[0.75rem] font-semibold uppercase tracking-wide text-amber-200"
+              >
+                Número principal
+              </p>
+              <p class="text-2xl font-semibold text-slate-50">
+                {telefonoPrincipal}
+              </p>
+              <p class="text-[0.8rem] text-slate-300">
+                Llamadas y WhatsApp · 24 hs
+              </p>
+              <div class="mt-2 flex w-full flex-col gap-2">
+                <a
+                  href={`tel:${principalLink}`}
+                  class="inline-flex w-full items-center justify-center rounded-full bg-amber-700 px-4 py-2 text-sm font-semibold text-slate-950 shadow-md hover:bg-amber-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                >
+                  Llamar al {telefonoPrincipal}
+                </a>
+                <a
+                  href={`https://wa.me/54${principalLink}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="inline-flex w-full items-center justify-center rounded-full border border-amber-400/80 px-4 py-2 text-sm font-semibold text-amber-100 hover:bg-amber-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                >
+                  WhatsApp {telefonoPrincipal}
+                </a>
+              </div>
+            </div>
+
+            {/* Número de GUARDIA */}
+            <div
+              class="flex flex-col items-center gap-2 rounded-xl bg-slate-950/90 p-3 text-center ring-1 ring-slate-800"
             >
-              Envianos un WhatsApp
-            </a>
+              <p
+                class="text-[0.75rem] font-semibold uppercase tracking-wide text-slate-300"
+              >
+                Guardia / línea adicional
+              </p>
+              <p class="text-2xl font-semibold text-slate-50">
+                {telefonoGuardia}
+              </p>
+              <p class="text-[0.8rem] text-slate-300">
+                Llamadas y WhatsApp
+              </p>
+              <div class="mt-2 flex w-full flex-col gap-2">
+                <a
+                  href={`tel:${guardiaLink}`}
+                  class="inline-flex w-full items-center justify-center rounded-full bg-slate-700 px-4 py-2 text-sm font-semibold text-slate-900 shadow-md hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                >
+                  Llamar al {telefonoGuardia}
+                </a>
+                <a
+                  href={`https://wa.me/54${guardiaLink}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="inline-flex w-full items-center justify-center rounded-full border border-slate-500 px-4 py-2 text-sm font-semibold text-amber-200 hover:bg-amber-400/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                >
+                  WhatsApp {telefonoGuardia}
+                </a>
+              </div>
+            </div>
           </div>
+
+          <p class="mt-3 text-center text-[0.75rem] text-slate-300">
+            Para consultas generales o coordinar trabajos, usá siempre el número
+            principal. La línea de guardia acompaña según la urgencia.
+          </p>
         </div>
 
-        {/* Teléfonos, dirección, mail, redes */}
+        {/* Teléfono de línea, correo, redes */}
         <div class="grid gap-4 text-sm text-slate-200 sm:grid-cols-2">
           <div class="space-y-3">
             <div>
-              <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
-                Teléfonos
+              <h3
+                class="text-xs font-semibold uppercase tracking-wide text-slate-300"
+              >
+                Teléfono de línea
               </h3>
               <ul class="mt-1 space-y-1 text-sm">
                 <li>
                   <a
-                    href={`tel:${telefono1Link}`}
+                    href={`tel:${lineaLink}`}
                     class="hover:text-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   >
-                    {telefono1} (guardia)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={`tel:${telefono2Link}`}
-                    class="hover:text-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
-                  >
-                    {telefono2} (línea alternativa)
+                    {telefonoLinea}
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+              <h3
+                class="text-xs font-semibold uppercase tracking-wide text-slate-300"
+              >
                 Correo
               </h3>
               <p class="mt-1">
                 <a
-                  href="mailto:cerrajeriammaresca@hotmail.com"
+                  href="mailto:cerrajeriamaresca@hotmail.com"
                   class="break-all hover:text-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                 >
                   cerrajeriamaresca@hotmail.com
@@ -118,19 +198,24 @@ const mapsQuery = encodeURIComponent("Palos 721, La Boca, Buenos Aires");
 
           <div class="space-y-3">
             <div>
-              <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+              <h3
+                class="text-xs font-semibold uppercase tracking-wide text-slate-300"
+              >
                 Dirección del local
               </h3>
               <p class="mt-1 text-sm text-slate-200">
                 Palos 721, Local 7 · La Boca, CABA
               </p>
               <p class="mt-1 text-[0.8rem] text-slate-400">
-                Local a la calle, a metros de la Av. Suarez y Av. Almirante Brown. 
+                Local a la calle, a metros de la Av. Suarez y Av. Almirante
+                Brown.
               </p>
             </div>
 
             <div>
-              <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+              <h3
+                class="text-xs font-semibold uppercase tracking-wide text-slate-300"
+              >
                 Redes
               </h3>
               <div class="mt-2 flex flex-wrap gap-2 text-sm">
@@ -157,46 +242,134 @@ const mapsQuery = encodeURIComponent("Palos 721, La Boca, Buenos Aires");
       </div>
 
       {/* Columna derecha: cómo trabajamos + zona de cobertura */}
-      <div
-        class="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/70 p-4 text-sm text-slate-200 md:p-5"
+      <aside
+        class="space-y-4 rounded-2xl border border-slate-800 bg-slate-950/80 p-4 text-sm text-slate-200 md:p-5"
+        aria-labelledby="como-trabajamos-heading"
       >
-        <div>
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+        {/* Cómo trabajamos */}
+        <div
+          class="space-y-3 rounded-xl bg-slate-950/95 p-4 ring-1 ring-slate-800"
+        >
+          <div
+            class="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-[0.75rem] text-slate-200 ring-1 ring-slate-700"
+          >
+            <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+            Proceso de atención
+          </div>
+
+          <h3
+            id="como-trabajamos-heading"
+            class="text-xs font-semibold uppercase tracking-wide text-slate-300"
+          >
             ¿Cómo trabajamos?
           </h3>
-          <ul class="mt-2 space-y-1.5 text-[0.85rem] text-slate-300">
-            <li>• Urgencias de cerrajería sin turno previo.</li>
-            <li>
-              • Consultas y presupuestos por WhatsApp con fotos de la puerta o
-              la cerradura.
+
+          <ol class="mt-2 space-y-3 text-[0.85rem]">
+            <li class="flex gap-3">
+              <span
+                class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-amber-500/20 text-[0.7rem] font-semibold text-amber-200"
+              >
+                1
+              </span>
+              <div>
+                <p class="font-semibold text-slate-100">
+                  Nos contactás por teléfono o WhatsApp
+                </p>
+                <p class="text-slate-300">
+                  Usá preferentemente el número principal y contanos qué pasó,
+                  en qué zona estás y si hay alguien afuera sin llave.
+                </p>
+              </div>
             </li>
-            <li>
-              • Trabajos en viviendas, comercios y consorcios (cerraduras,
-              herrajes, frentes vidriados, vehículos).
+            <li class="flex gap-3">
+              <span
+                class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-amber-500/20 text-[0.7rem] font-semibold text-amber-200"
+              >
+                2
+              </span>
+              <div>
+                <p class="font-semibold text-slate-100">
+                  Evaluamos el caso y coordinamos
+                </p>
+                <p class="text-slate-300">
+                  Te pedimos foto o video de la puerta/cerradura y te indicamos
+                  el tiempo estimado de llegada según la zona.
+                </p>
+              </div>
             </li>
-          </ul>
+            <li class="flex gap-3">
+              <span
+                class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-amber-500/20 text-[0.7rem] font-semibold text-amber-200"
+              >
+                3
+              </span>
+              <div>
+                <p class="font-semibold text-slate-100">
+                  Trabajo en el lugar, sin romper de más
+                </p>
+                <p class="text-slate-300">
+                  Realizamos apertura, reparación o cambio según corresponda,
+                  priorizando siempre cuidar la puerta y el marco.
+                </p>
+              </div>
+            </li>
+          </ol>
         </div>
 
-        <div>
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-300">
+        {/* Zona de cobertura */}
+        <div
+          class="space-y-3 rounded-xl bg-slate-950/95 p-4 ring-1 ring-slate-800"
+        >
+          <h3
+            class="text-xs font-semibold uppercase tracking-wide text-slate-300"
+          >
             Zona de cobertura
           </h3>
-          <p class="mt-2 text-[0.85rem] text-slate-300">
+          <p class="text-[0.85rem] text-slate-300">
             Local a la calle en La Boca, con atención en barrios cercanos de
             CABA y zona sur según disponibilidad.
           </p>
-          <p class="mt-1 text-[0.8rem] text-slate-400">
-            Para urgencias, indicá siempre barrio y tipo de vivienda o comercio
-            al iniciar la consulta por WhatsApp.
+          <div class="mt-2 flex flex-wrap gap-1.5 text-[0.75rem]">
+            <span
+              class="rounded-full bg-amber-500/15 px-3 py-1 font-medium text-amber-200 ring-1 ring-amber-500/40"
+            >
+              La Boca (local)
+            </span>
+            <span
+              class="rounded-full bg-slate-900 px-3 py-1 text-slate-200 ring-1 ring-slate-700"
+            >
+              Barracas
+            </span>
+            <span
+              class="rounded-full bg-slate-900 px-3 py-1 text-slate-200 ring-1 ring-slate-700"
+            >
+              San Telmo
+            </span>
+            <span
+              class="rounded-full bg-slate-900 px-3 py-1 text-slate-200 ring-1 ring-slate-700"
+            >
+              Constitución
+            </span>
+            <span
+              class="rounded-full bg-slate-900 px-3 py-1 text-slate-200 ring-1 ring-slate-700"
+            >
+              Zona sur a coordinar
+            </span>
+          </div>
+          <p class="mt-2 text-[0.8rem] text-slate-400">
+            Para urgencias, indicá siempre barrio, dirección aproximada y tipo
+            de vivienda o comercio al iniciar la consulta por WhatsApp.
           </p>
         </div>
-      </div>
+      </aside>
     </div>
   </div>
 
   {/* Mapa de ubicación */}
   <div class="mt-8 space-y-3">
-    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <div
+      class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"
+    >
       <div>
         <h3 class="text-sm font-semibold text-slate-100 md:text-base">
           Mapa de ubicación
@@ -223,7 +396,9 @@ const mapsQuery = encodeURIComponent("Palos 721, La Boca, Buenos Aires");
         class="flex items-center justify-between border-b border-slate-800 bg-slate-950/80 px-3 py-2 text-[0.8rem] text-slate-300"
       >
         <span>Palos 721, Local 7 · La Boca</span>
-        <span class="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[0.7rem] text-emerald-200">
+        <span
+          class="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[0.7rem] text-emerald-200"
+        >
           Cómo llegar
         </span>
       </div>

@@ -1,0 +1,62 @@
+---
+// src/components/Seo.astro
+import { siteConfig } from "../config/site";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+  image?: string;
+  index?: boolean;
+  schema?: Record<string, unknown> | null;
+}
+
+const {
+  title = siteConfig.defaultTitle,
+  description = siteConfig.defaultDescription,
+  path = "/",
+  image = siteConfig.defaultImage,
+  index = true,
+  schema = null,
+} = Astro.props;
+
+const baseUrl = siteConfig.siteUrl;
+const url = new URL(path, baseUrl).toString();
+const robotsContent = index ? "index,follow" : "noindex,nofollow";
+const ogImage = image.startsWith("http")
+  ? image
+  : new URL(image, baseUrl).toString();
+const jsonLd = schema ? JSON.stringify(schema) : null;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robotsContent} />
+<link rel="canonical" href={url} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content={siteConfig.locale} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={title} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+{siteConfig.twitterUser && (
+  <meta name="twitter:site" content={siteConfig.twitterUser} />
+)}
+
+<!-- Idioma -->
+<meta http-equiv="content-language" content={siteConfig.locale} />
+
+<!-- JSON-LD (schema.org) -->
+{jsonLd && (
+  <script type="application/ld+json" set:html={jsonLd}></script>
+)}

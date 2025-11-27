@@ -9,7 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdoc": "^0.15.9",
+    "@astrojs/partytown": "^2.1.4",
     "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.6.0",
     "@astrojs/vercel": "^9.0.1",
     "@tailwindcss/vite": "^4.1.17",
     "@types/react": "^19.2.7",

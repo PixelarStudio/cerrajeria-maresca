@@ -193,7 +193,7 @@ export default function AtencionInmediataCard({
       aria-label="Atención inmediata por WhatsApp"
       className={[
         "relative w-full max-w-md rounded-3xl border border-amber-400/30",
-        "bg-[radial-gradient(circle_at_top,#7c2d12_0,#020617_52%,#020617_100%)]",
+        "bg-[radial-gradient(circle_at_top,#A43B1D_0,#292E65_52%,#212551_100%)]",
         "p-4 sm:p-6 text-slate-50 shadow-xl",
         // ALTURA FIJA PARA QUE EL HERO NO SALTE
         "min-h-[440px] sm:min-h-[460px]",
@@ -354,7 +354,7 @@ export default function AtencionInmediataCard({
                   className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
                              text-slate-50 placeholder:text-slate-500
                              focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
-                  placeholder="Ej: Cristian"
+                  placeholder="Ej: Marta"
                 />
                 {errorNombre && (
                   <span className="mt-1 block text-[0.7rem] text-amber-300">
@@ -372,7 +372,7 @@ export default function AtencionInmediataCard({
                   className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
                              text-slate-50 placeholder:text-slate-500
                              focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
-                  placeholder="Ej: 11 6218 1863"
+                  placeholder="Ej: 11 1234 5678"
                 />
                 {errorTelefono && (
                   <span className="mt-1 block text-[0.7rem] text-amber-300">
@@ -405,10 +405,10 @@ export default function AtencionInmediataCard({
                 Chatear por WhatsApp
               </button>
               <a
-                href={`tel:+541162181863`}
+                href={`tel:+541133164381`}
                 className="inline-flex w-full items-center justify-center rounded-full border border-amber-400/70 px-4 py-2.5
-                           text-sm font-semibold text-amber-200
-                           hover:bg-amber-400/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                           text-sm font-semibold text-marine-700
+                           hover:bg-amber-400/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber600"
               >
                 Llamar ahora
               </a>

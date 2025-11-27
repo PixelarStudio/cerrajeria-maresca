@@ -4,18 +4,80 @@ import Hero from "../components/Hero.astro";
 import ServiciosGrid from "../components/ServiciosGrid.astro";
 import InfoContacto from "../components/InfoContacto.astro";
 import WhatsAppFab from "../components/WhatsAppFab.jsx";
+import { siteConfig } from "../config/site";
 
 // Número principal de WhatsApp (podés dejarlo hardcodeado o por .env)
 const whatsappNumber =
   import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "5491162181863";
+
+// SEO específico de la Home
+const title = "Cerrajería 24 hs en La Boca | Cerrajería Maresca";
+const description =
+  "Cerrajería Maresca brinda servicio de cerrajería urgente las 24 horas en La Boca, CABA. Apertura de puertas, cambio de combinación, trabajo en blindex y urgencias. Atención inmediata por WhatsApp.";
+
+// Path relativo de la página (se usa para canonical)
+const path = "/";
+
+// Schema.org LocalBusiness para SEO local
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": siteConfig.business.type,
+  name: siteConfig.business.legalName,
+  image: new URL(siteConfig.defaultImage, siteConfig.siteUrl).toString(),
+  "@id": `${siteConfig.siteUrl}/#cerrajeria-maresca`,
+  url: siteConfig.siteUrl,
+  telephone: siteConfig.business.phoneNumbers,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: siteConfig.business.streetAddress,
+    addressLocality: siteConfig.business.addressLocality,
+    addressRegion: siteConfig.business.addressRegion,
+    postalCode: siteConfig.business.postalCode,
+    addressCountry: siteConfig.business.addressCountry,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: siteConfig.business.latitude,
+    longitude: siteConfig.business.longitude,
+  },
+  openingHoursSpecification: siteConfig.business.openingHours.map((oh) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: oh.dayOfWeek,
+    opens: oh.opens,
+    closes: oh.closes,
+  })),
+  areaServed: siteConfig.business.serviceArea,
+  sameAs: [
+    siteConfig.social.instagram,
+  ].filter(Boolean),
+  makesOffer: [
+    {
+      "@type": "Offer",
+      name: "Apertura de puertas",
+    },
+    {
+      "@type": "Offer",
+      name: "Cambio de combinación",
+    },
+    {
+      "@type": "Offer",
+      name: "Cerrajería de urgencia 24 hs",
+    },
+  ],
+};
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  schema={localBusinessSchema}
+>
   <Hero />
   <ServiciosGrid />
   <InfoContacto />
 
-  <!-- FAB de WhatsApp: OBLIGATORIO pasar phone porque el componente lo pide -->
+  <!-- FAB de WhatsApp: se usa el mismo número para el componente -->
   <WhatsAppFab
     client:idle
     whatsappNumber={whatsappNumber}

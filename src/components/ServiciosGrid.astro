@@ -8,11 +8,6 @@ const serviciosIntroMobile =
 const serviciosIntroDesktop =
   "Trabajamos sobre cerraduras, herrajes, puertas de cristal y apertura de vehículos, con atención en La Boca y alrededores.";
 
-// Traemos los servicios desde content collections, ordenados por `orden`
-const servicios = (await getCollection("servicios")).sort(
-  (a, b) => (a.data.orden ?? 0) - (b.data.orden ?? 0)
-);
-
 // Subtítulo bajo el título según slug
 const subheadingBySlug = {
   "urgencias-24-horas": "Servicio especializado",
@@ -21,9 +16,9 @@ const subheadingBySlug = {
   "herrajes-y-cerraduras": "Refuerzos de seguridad",
   "cierrapuertas-de-piso": "Edificios y locales",
   "apertura-de-vehiculos": "Autos y utilitarios",
-};
+} as const;
 
-// Color del subtítulo (mismo criterio que antes)
+// Color del subtítulo
 const subheadingClassBySlug = {
   "urgencias-24-horas": "text-red-300/80",
   reparaciones: "text-sky-300/80",
@@ -31,9 +26,9 @@ const subheadingClassBySlug = {
   "herrajes-y-cerraduras": "text-emerald-300/80",
   "cierrapuertas-de-piso": "text-amber-300/80",
   "apertura-de-vehiculos": "text-indigo-300/80",
-};
+} as const;
 
-// Footer explicativo según slug (lo que tenías hardcodeado)
+// Footer explicativo según slug
 const footerBySlug = {
   "urgencias-24-horas":
     "Pensado para personas que quedaron afuera o necesitan atención inmediata.",
@@ -47,99 +42,130 @@ const footerBySlug = {
     "Recomendado para puertas de acceso principal y pasillos de uso frecuente.",
   "apertura-de-vehiculos":
     "Para aperturas sin rotura en vía pública, garages o cocheras.",
-};
+} as const;
+
+// Tipo seguro para los slugs de servicios
+type ServicioSlug = keyof typeof subheadingBySlug;
+
+// Traemos los servicios desde content collections, ordenados por `orden`
+const servicios = (await getCollection("servicios")).sort(
+  (a, b) => (a.data.orden ?? 0) - (b.data.orden ?? 0)
+);
 ---
 
 <section
   id="servicios"
-  class="mb-14 mt-10 border-t border-slate-900 pt-8 md:mt-16 md:border-none md:pt-0"
+  class="mb-14 mt-10 scroll-mt-24 md:mt-16"
 >
-  <div class="mb-6 flex flex-col gap-2">
-    <h2 class="text-xl font-semibold text-slate-50 md:text-2xl">
-      Servicios de cerrajería
-    </h2>
+  <div class="mx-auto max-w-6xl px-0">
+    {/* Segunda capa oscura que flota sobre el naranja */}
+    <div
+      class="rounded-3xl bg-marine-700/95 px-4 py-6 shadow-xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-sm md:px-6 md:py-8"
+    >
+      {/* Encabezado */}
+      <div class="mb-6 flex flex-col gap-2 md:mb-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-maresca-300">
+          Servicios de cerrajería
+        </p>
 
-    <!-- Intro mobile -->
-    <p class="text-sm text-slate-300 md:hidden">
-      {serviciosIntroMobile}
-    </p>
+        <h2 class="text-2xl font-semibold text-white md:text-3xl">
+          Trabajos sobre cerraduras, herrajes y aperturas
+        </h2>
 
-    <!-- Intro desktop -->
-    <p class="hidden max-w-2xl text-sm text-slate-300 md:block">
-      {serviciosIntroDesktop}
-    </p>
-  </div>
+        {/* Intro mobile */}
+        <p class="text-sm text-white/80 md:hidden">
+          {serviciosIntroMobile}
+        </p>
 
-  <div class="grid gap-4 md:grid-cols-3">
-    {servicios.map((service) => {
-      const { title, slug, descripcionCorta, descripcionLarga, imagen, imagenAlt } =
-        service.data;
+        {/* Intro desktop */}
+        <p class="hidden max-w-2xl text-sm text-white/80 md:block">
+          {serviciosIntroDesktop}
+        </p>
+      </div>
 
-      const subheading = subheadingBySlug[slug] ?? "Servicio de cerrajería";
-      const subClass =
-        subheadingClassBySlug[slug] ?? "text-slate-300/80";
-      const footerText =
-        footerBySlug[slug] ??
-        "Servicio de cerrajería adaptado a viviendas, comercios y consorcios.";
+      {/* Grid de servicios */}
+      <div class="grid gap-4 md:grid-cols-3">
+        {servicios.map((service) => {
+          const {
+            title,
+            slug,
+            descripcionCorta,
+            descripcionLarga,
+            imagen,
+            imagenAlt,
+          } = service.data;
 
-      return (
-        <article
-          class="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/40 p-4 shadow-sm"
-        >
-          {imagen && (
-            <div
-              class="pointer-events-none absolute inset-0"
-              aria-hidden="true"
+          // Tipamos el slug para que TS sepa que es una key válida
+          const slugKey = slug as ServicioSlug;
+
+          const subheading =
+            subheadingBySlug[slugKey] ?? "Servicio de cerrajería";
+          const subClass =
+            subheadingClassBySlug[slugKey] ?? "text-slate-300/80";
+          const footerText =
+            footerBySlug[slugKey] ??
+            "Servicio de cerrajería adaptado a viviendas, comercios y consorcios.";
+
+          return (
+            <article
+              class="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-800/70 bg-slate-950/40 p-4 shadow-md shadow-black/40"
             >
-              <img
-                src={imagen}
-                alt={imagenAlt || title}
-                loading="lazy"
-                class="h-full w-full object-cover object-center"
-              />
-              <div
-                class="absolute inset-0 bg-linear-to-br from-slate-950/75 via-slate-950/92 to-slate-950/95
-                         group-hover:from-slate-950/90 group-hover:via-slate-950/90 group-hover:to-slate-950/95
-                         transition-colors duration-200"
-              ></div>
-            </div>
-          )}
-
-          <div class="relative z-10 flex flex-1 flex-col justify-between">
-            <header class="mb-2 flex items-center gap-3">
-              <ServiceIcon title={title} />
-              <div>
-                <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
-                  {title}
-                </h3>
-                <p
-                  class={`text-[0.7rem] font-medium uppercase md:text-[0.7rem] ${subClass}`}
+              {imagen && (
+                <div
+                  class="pointer-events-none absolute inset-0"
+                  aria-hidden="true"
                 >
-                  {subheading}
+                  <img
+                    src={imagen}
+                    alt={imagenAlt || title}
+                    loading="lazy"
+                    class="h-full w-full object-cover object-center"
+                  />
+                  <div
+                    class="absolute inset-0 bg-linear-to-br from-slate-950/75 via-slate-950/92 to-slate-950/95
+                               group-hover:from-slate-950/90 group-hover:via-slate-950/90 group-hover:to-slate-950/95
+                               transition-colors duration-200"
+                  ></div>
+                </div>
+              )}
+
+              <div class="relative z-10 flex flex-1 flex-col justify-between">
+                <header class="mb-2 flex items-center gap-3">
+                  <ServiceIcon title={title} />
+                  <div>
+                    <h3 class="text-sm font-semibold text-slate-50 md:text-[0.95rem]">
+                      {title}
+                    </h3>
+                    <p
+                      class={`text-[0.7rem] font-medium uppercase md:text-[0.7rem] ${subClass}`}
+                    >
+                      {subheading}
+                    </p>
+                  </div>
+                </header>
+
+                {/* Descripción mobile (corta) */}
+                {descripcionCorta && (
+                  <p class="text-xs leading-relaxed text-slate-300 md:hidden">
+                    {descripcionCorta}
+                  </p>
+                )}
+
+                {/* Descripción desktop (larga si existe, sino la corta) */}
+                <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
+                  {descripcionLarga || descripcionCorta}
                 </p>
+
+                <footer class="mt-3">
+                  <span class="text-[0.75rem] text-slate-400">
+                    {footerText}
+                  </span>
+                </footer>
               </div>
-            </header>
-
-            {/* Descripción mobile (corta) */}
-            {descripcionCorta && (
-              <p class="text-xs leading-relaxed text-slate-300 md:hidden">
-                {descripcionCorta}
-              </p>
-            )}
-
-            {/* Descripción desktop (larga si existe, sino la corta) */}
-            <p class="hidden text-sm leading-relaxed text-slate-300 md:block">
-              {descripcionLarga || descripcionCorta}
-            </p>
-
-            <footer class="mt-3">
-              <span class="text-[0.75rem] text-slate-400">
-                {footerText}
-              </span>
-            </footer>
-          </div>
-        </article>
-      );
-    })}
+            </article>
+          );
+        })}
+      </div>
+    </div>
   </div>
 </section>
