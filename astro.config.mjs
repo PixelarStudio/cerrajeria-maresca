@@ -1,23 +1,18 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import react from '@astrojs/react';
-import tailwindcss from '@tailwindcss/vite';
+import react from "@astrojs/react";
+import markdoc from "@astrojs/markdoc";
+import partytown from "@astrojs/partytown";
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 
-import vercel from '@astrojs/vercel';
-
-import markdoc from '@astrojs/markdoc';
-import partytown from '@astrojs/partytown';
-import sitemap from '@astrojs/sitemap';
-
-// https://astro.build/config
+// Config Astro 5.x para salida estática (Hostinger)
 export default defineConfig({
   integrations: [react(), markdoc(), partytown(), sitemap()],
+  output: "static", // export HTML estático
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
-  output: 'static',
-  adapter: vercel()
 });
-
