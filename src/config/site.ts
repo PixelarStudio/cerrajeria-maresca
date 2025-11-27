@@ -10,7 +10,7 @@ export const siteConfig = {
   currency: "ARS",
 
   // Logo principal (en /public/images/logotipo/logo1.png)
-  logo: "/images/logotipo/logo1.png",
+  logo: "/images/logo-oscuro.png",
 
   // Imagen por defecto para OG / JSON-LD
   defaultTitle: "Cerrajería Maresca | Cerrajería 24 hs en La Boca",
@@ -21,15 +21,15 @@ export const siteConfig = {
   twitterUser: "",
 
   social: {
-    whatsappGuardia: + "54 9 11 6218 1863",
-    whatsappAlternativa: "+54 9 11 3316 4381",
+    whatsappGuardia: + "+54 9 11 3316 4381",
+    whatsappAlternativa: "54 9 11 6218 1863",
     instagram: "", // poné aquí el Instagram real si lo tienen
   },
 
   phones: {
     landline: "4301 5204",
-    mobileGuardia: "+54 9 11 6218 1863",
-    mobileAlternativa: "+54 9 11 3316 4381",
+    mobileGuardia: "+54 9 11 3316 4381 ",
+    mobileAlternativa: "54 9 11 6218 1863",
   },
 
   business: {
