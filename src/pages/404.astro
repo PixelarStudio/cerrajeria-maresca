@@ -3,26 +3,92 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const title = "Página no encontrada | Cerrajería Maresca";
 const description =
-  "La página que estás buscando no existe. Volvé al inicio de Cerrajería Maresca para ver servicios y contacto.";
+  "La página que estás buscando no existe. Volvé al inicio de Cerrajería Maresca para ver servicios, dirección y teléfonos de urgencias.";
 const path = "/404";
+
+// Para armar la “pantalla” de cuadritos del error
+const cells = Array.from({ length: 16 });
+
+const telefonoPrincipal = "11-3316-4381"; // número principal
+const telefonoPrincipalLink = telefonoPrincipal.replace(/[^0-9]/g, "");
 ---
 
 <BaseLayout {title} {description} {path} index={false}>
-  <main class="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center gap-4 px-4 text-center">
-    <p class="text-sm font-semibold text-amber-400">Error 404</p>
-    <h1 class="text-2xl font-semibold text-zinc-50">
-      No encontramos la página que buscás.
-    </h1>
-    <p class="max-w-md text-sm text-zinc-300">
-      Puede que el enlace esté mal escrito o que la sección haya cambiado. Te
-      invitamos a volver al inicio para ver los servicios de la cerrajería y
-      los datos de contacto.
-    </p>
-    <a
-      href="/"
-      class="mt-2 inline-flex items-center justify-center rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+  <section
+    class="mx-auto flex min-h-[70vh] max-w-5xl items-center justify-center px-4 py-10"
+  >
+    <div
+      class="w-full rounded-3xl bg-[radial-gradient(circle_at_top,#101433_0,#1d2547_45%,#020617_100%)] px-6 py-10 text-center text-white shadow-2xl shadow-black/60 ring-1 ring-white/10 md:px-10 md:py-12"
     >
-      Volver al inicio
-    </a>
-  </main>
+      {/* 404 grande */}
+      <p class="text-5xl font-extrabold tracking-tight text-white md:text-6xl">
+        404
+      </p>
+
+      {/* “Pantalla” de error estilo card */}
+      <div class="mt-6 flex flex-col items-center justify-center gap-2">
+        <div
+          class="flex h-40 w-40 flex-col items-center justify-center rounded-3xl bg-slate-950/90 shadow-xl shadow-black/60 ring-1 ring-maresca-500/70"
+        >
+          <div class="grid h-20 w-20 grid-cols-4 gap-1.5">
+            {cells.map((_, idx) => (
+              <span
+                class="rounded-md bg-marine-500/80"
+                aria-hidden="true"
+                key={idx}
+              ></span>
+            ))}
+          </div>
+          <p class="mt-3 text-[0.7rem] font-semibold tracking-[0.25em] text-maresca-300">
+            ERROR 404
+          </p>
+        </div>
+
+        <p class="text-[0.75rem] text-white/70">
+          El enlace no existe o ya no está disponible.
+        </p>
+      </div>
+
+      {/* Texto principal orientado a cerrajería */}
+      <div class="mt-6 space-y-3">
+        <h1 class="text-xl font-semibold md:text-2xl">
+          ¡Ups! Página no encontrada
+        </h1>
+        <p class="mx-auto max-w-xl text-sm text-white/85 md:text-[0.95rem]">
+          Puede que el enlace esté mal escrito o que la sección haya cambiado.
+          Si necesitás un trabajo de cerrajería, volvés al inicio o nos llamás
+          directo para coordinar la atención.
+        </p>
+      </div>
+
+      {/* Acciones principales */}
+      <div
+        class="mt-8 flex flex-col items-center justify-center gap-3 text-sm sm:flex-row sm:gap-4"
+      >
+        <a
+          href="/"
+          class="inline-flex min-w-[180px] items-center justify-center gap-2 rounded-full bg-maresca-500 px-5 py-2.5 font-semibold text-slate-950 shadow-lg shadow-black/40 transition hover:bg-maresca-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#101433]"
+        >
+          Volver al inicio
+          <span aria-hidden="true">↩</span>
+        </a>
+
+        <a
+          href={`tel:${telefonoPrincipalLink}`}
+          class="inline-flex min-w-[200px] items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-5 py-2.5 font-semibold text-white/90 transition hover:border-white hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#101433]"
+        >
+          Llamar a la cerrajería
+          <span aria-hidden="true">📞</span>
+        </a>
+      </div>
+
+      {/* Números de referencia */}
+      <p class="mt-6 text-center text-[0.75rem] text-white/70">
+        Número principal:{" "}
+        <span class="font-semibold text-white">{telefonoPrincipal}</span>.{" "}
+        Guardia adicional:{" "}
+        <span class="font-semibold text-white">11-6218-1863</span>.
+      </p>
+    </div>
+  </section>
 </BaseLayout>
