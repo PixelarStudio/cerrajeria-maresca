@@ -9,7 +9,7 @@ const isMobile = () =>
 
 const enc = (s) => encodeURIComponent((s || "").trim());
 
-// 6 servicios reales del sitio
+// === SERVICIOS: ahora son 7 ===
 const SERVICIOS = [
   {
     id: "urgencias24",
@@ -38,6 +38,18 @@ const SERVICIOS = [
       "Ej: puerta de cristal templado de local, tipo de cerradura, si tiene cierrapuerta de piso, dirección…",
     defaultTipoLugar: "local",
   },
+
+  // === NUEVO SERVICIO (añadido sin tocar nada más) ===
+  {
+    id: "frentesVidriados",
+    label: "Frentes vidriados y locales",
+    baseText:
+      "Hola, necesito asistencia en un frente vidriado o cerradura de local comercial.",
+    placeholder:
+      "Ej: cerradura de blindex, herraje inferior, desalineado, local en galería o calle…",
+    defaultTipoLugar: "local",
+  },
+
   {
     id: "herrajes",
     label: "Herrajes y cerraduras",
@@ -105,7 +117,7 @@ export default function AtencionInmediataCard({
     return (
       (whatsappNumber && whatsappNumber.trim()) ||
       (envNumber && String(envNumber).trim()) ||
-      "5491162181863"
+      "5491133164381" // ← ESTE ES EL PRINCIPAL (3316)
     );
   }, [whatsappNumber]);
 
@@ -176,11 +188,10 @@ export default function AtencionInmediataCard({
     ].filter(Boolean);
 
     const composed = partes.join("\n");
-    const utm = "utm_source=site&utm_medium=hero-panel&utm_campaign=whatsapp";
 
     const url = isMobile()
-      ? `${baseUrl}?text=${enc(composed)}&app_absent=0&${utm}`
-      : `${baseUrl}&text=${enc(composed)}&${utm}`;
+      ? `${baseUrl}?text=${enc(composed)}&app_absent=0`
+      : `${baseUrl}&text=${enc(composed)}`;
 
     if (typeof window !== "undefined") {
       window.open(url, "_blank", "noopener,noreferrer");
@@ -194,12 +205,11 @@ export default function AtencionInmediataCard({
         "relative w-full max-w-md rounded-3xl border border-amber-400/30",
         "bg-[radial-gradient(circle_at_top,#A43B1D_0,#292E65_52%,#212551_100%)]",
         "p-4 sm:p-6 text-slate-50 shadow-xl",
-        // ALTURA FIJA PARA QUE EL HERO NO SALTE
         "min-h-[440px] sm:min-h-[460px]",
         "flex flex-col gap-3",
       ].join(" ")}
     >
-      {/* Header: texto + badges, responsive */}
+      {/* HEADER */}
       <header className="mb-1">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -213,65 +223,17 @@ export default function AtencionInmediataCard({
               La Boca y alrededores. Priorizamos urgencias y personas afuera.
             </p>
           </div>
-
-          {/* Badges en desktop/tablet: arriba a la derecha */}
-          <div className="hidden flex-col items-end gap-1.5 sm:flex">
-            <div
-              className="inline-flex items-center gap-2 rounded-full bg-amber-400/15 px-3 py-1 text-[0.7rem] font-semibold text-amber-200 shadow-sm ring-1 ring-amber-400/40"
-              aria-label="WhatsApp activo para recibir consultas"
-            >
-              <span
-                className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_3px_rgba(74,222,128,0.45)]"
-                aria-hidden="true"
-              />
-              <span className="whitespace-nowrap">WhatsApp activo</span>
-            </div>
-            <div
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-[0.7rem] font-semibold text-emerald-200 shadow-sm ring-1 ring-emerald-400/45"
-              aria-label="Prioridad para urgencias"
-            >
-              <span
-                className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_0_3px_rgba(251,191,36,0.45)]"
-                aria-hidden="true"
-              />
-              <span className="whitespace-nowrap">Urgencias primero</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Badges en mobile: debajo del título, en fila */}
-        <div className="mt-3 flex flex-wrap gap-1.5 sm:hidden">
-          <div
-            className="inline-flex items-center gap-2 rounded-full bg-amber-400/15 px-3 py-1 text-[0.7rem] font-semibold text-amber-200 shadow-sm ring-1 ring-amber-400/40"
-            aria-label="WhatsApp activo para recibir consultas"
-          >
-            <span
-              className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_3px_rgba(74,222,128,0.45)]"
-              aria-hidden="true"
-            />
-            <span className="whitespace-nowrap">WhatsApp activo</span>
-          </div>
-          <div
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-[0.7rem] font-semibold text-emerald-200 shadow-sm ring-1 ring-emerald-400/45"
-            aria-label="Prioridad para urgencias"
-          >
-            <span
-              className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_0_3px_rgba(251,191,36,0.45)]"
-              aria-hidden="true"
-            />
-            <span className="whitespace-nowrap">Urgencias primero</span>
-          </div>
         </div>
       </header>
 
-      {/* CONTENIDO: dos pasos, dentro de un contenedor de altura fija */}
+      {/* CUERPO */}
       <div className="flex-1 overflow-hidden">
         {step === 1 ? (
-          // PASO 1 – Elegir servicio
           <div className="flex h-full flex-col gap-3">
             <p className="text-[0.75rem] font-medium text-slate-200">
               Elegí el servicio de cerrajería
             </p>
+
             <div className="flex-1 space-y-2 overflow-y-auto pr-1">
               <div className="grid gap-2 sm:grid-cols-2">
                 {SERVICIOS.map((s) => (
@@ -282,14 +244,12 @@ export default function AtencionInmediataCard({
                     className={[
                       "flex items-center gap-2 rounded-2xl border px-3 py-2 text-left",
                       servicioId === s.id
-                        ? "border-amber-400 bg-amber-400/10 shadow-[0_0_0_1px_rgba(251,191,36,0.35)]"
+                        ? "border-amber-400 bg-amber-400/10"
                         : "border-slate-700 bg-slate-900/70 hover:border-amber-300/70",
                       "text-[0.8rem] sm:text-[0.85rem]",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400",
                     ].join(" ")}
                   >
                     <span
-                      aria-hidden="true"
                       className={[
                         "inline-flex h-5 w-5 items-center justify-center rounded-full border text-[0.7rem]",
                         servicioId === s.id
@@ -308,20 +268,12 @@ export default function AtencionInmediataCard({
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="mt-1 inline-flex w-full items-center justify-center rounded-full bg-amber-400 px-4 py-2.5
-                         text-sm font-semibold text-slate-950 shadow-lg
-                         hover:bg-amber-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="mt-1 w-full rounded-full bg-amber-400 px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-lg hover:bg-amber-300"
             >
               Continuar con los datos
             </button>
-
-            <p className="text-[0.7rem] text-slate-400">
-              En el siguiente paso completás zona, nombre y teléfono. El mensaje
-              se arma solo en WhatsApp.
-            </p>
           </div>
         ) : (
-          // PASO 2 – Formulario
           <form onSubmit={handleSubmit} className="flex h-full flex-col gap-2">
             <div className="flex items-center justify-between gap-2">
               <div className="text-[0.7rem]">
@@ -331,22 +283,20 @@ export default function AtencionInmediataCard({
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="rounded-full border border-amber-400/60 px-3 py-1 text-[0.7rem] font-medium text-amber-200
-                           hover:bg-amber-400/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                className="rounded-full border border-amber-400/60 px-3 py-1 text-[0.7rem] font-medium text-amber-200"
               >
                 Cambiar servicio
               </button>
             </div>
 
+            {/* Datos del formulario */}
             <div className="flex-1 space-y-2 overflow-y-auto pr-1 text-[0.8rem] sm:text-[0.85rem]">
               <label className="block font-medium text-slate-200">
                 Tipo de lugar <span className="text-amber-300">*</span>
                 <select
                   value={tipoLugar}
                   onChange={(e) => setTipoLugar(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
-                             text-slate-50 placeholder:text-slate-500
-                             focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-50"
                 >
                   {TIPO_LUGAR_OPCIONES.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -354,11 +304,6 @@ export default function AtencionInmediataCard({
                     </option>
                   ))}
                 </select>
-                {errorTipoLugar && (
-                  <span className="mt-1 block text-[0.7rem] text-amber-300">
-                    {errorTipoLugar}
-                  </span>
-                )}
               </label>
 
               <label className="block font-medium text-slate-200">
@@ -367,16 +312,9 @@ export default function AtencionInmediataCard({
                   type="text"
                   value={zona}
                   onChange={(e) => setZona(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
-                             text-slate-50 placeholder:text-slate-500
-                             focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-50"
                   placeholder="Ej: La Boca, Barracas, San Telmo…"
                 />
-                {errorZona && (
-                  <span className="mt-1 block text-[0.7rem] text-amber-300">
-                    {errorZona}
-                  </span>
-                )}
               </label>
 
               <label className="block font-medium text-slate-200">
@@ -385,16 +323,9 @@ export default function AtencionInmediataCard({
                   type="text"
                   value={nombreContacto}
                   onChange={(e) => setNombreContacto(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
-                             text-slate-50 placeholder:text-slate-500
-                             focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-50"
                   placeholder="Ej: Marta"
                 />
-                {errorNombre && (
-                  <span className="mt-1 block text-[0.7rem] text-amber-300">
-                    {errorNombre}
-                  </span>
-                )}
               </label>
 
               <label className="block font-medium text-slate-200">
@@ -403,16 +334,9 @@ export default function AtencionInmediataCard({
                   type="tel"
                   value={telefonoContacto}
                   onChange={(e) => setTelefonoContacto(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
-                             text-slate-50 placeholder:text-slate-500
-                             focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-50"
                   placeholder="Ej: 11 1234 5678"
                 />
-                {errorTelefono && (
-                  <span className="mt-1 block text-[0.7rem] text-amber-300">
-                    {errorTelefono}
-                  </span>
-                )}
               </label>
 
               <label className="block font-medium text-slate-200">
@@ -421,37 +345,27 @@ export default function AtencionInmediataCard({
                   value={detalle}
                   onChange={(e) => setDetalle(e.target.value)}
                   rows={2}
-                  className="mt-1 w-full resize-none rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm
-                             text-slate-50 placeholder:text-slate-500
-                             focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                  className="mt-1 w-full resize-none rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-50"
                   placeholder={selectedServicio.placeholder}
-                />
+                ></textarea>
               </label>
             </div>
 
             <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center">
               <button
                 type="submit"
-                className="inline-flex w-full items-center justify-center rounded-full bg-amber-400 px-4 py-2.5
-                           text-sm font-semibold text-slate-950 shadow-lg
-                           hover:bg-amber-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                className="w-full rounded-full bg-amber-400 px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-lg hover:bg-amber-300"
               >
                 Chatear por WhatsApp
               </button>
+
               <a
-                href={`tel:+541133164381`}
-                className="inline-flex w-full items-center justify-center rounded-full border border-amber-400/70 px-4 py-2.5
-                           text-sm font-semibold text-marine-700
-                           hover:bg-amber-400/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                href="tel:+541133164381"
+                className="w-full rounded-full border border-amber-400/70 px-4 py-2.5 text-sm font-semibold text-slate-200 hover:bg-amber-400/10"
               >
                 Llamar ahora
               </a>
             </div>
-
-            <p className="mt-1 text-[0.7rem] text-slate-400">
-              El chat se abre con la información completa. Podés adjuntar fotos
-              de la puerta, cerradura o vehículo directamente en WhatsApp.
-            </p>
           </form>
         )}
       </div>

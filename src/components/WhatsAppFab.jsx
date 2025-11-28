@@ -10,11 +10,12 @@ const isMobile = () =>
 const enc = (s) => encodeURIComponent((s || "").trim());
 
 // Definición base de servicios
+// --- SERVICIOS ACTUALIZADOS ---
 const SERVICIOS = [
   {
     id: "urgencias",
     label: "Urgencias 24 horas",
-    intro: "Apertura de puertas y soluciones rápidas todos los días.",
+    intro: "Atendemos emergencias de cerrajería sin rotura cuando es posible, cambio de cilindros y refuerzos.",
     placeholderDetalle:
       "Ej: quedé afuera de casa/departamento, puerta principal, llave del lado de adentro…",
     tipo: "general",
@@ -22,41 +23,49 @@ const SERVICIOS = [
   {
     id: "reparaciones",
     label: "Reparaciones de cerraduras",
-    intro: "Cerraduras que se traban, giran en falso o quedaron dañadas.",
+    intro: "Si la cerradura no responde bien, traba o gira en falso, evaluamos y resolvemos sin reemplazar toda la puerta.",
     placeholderDetalle:
-      "Ej: cerradura se traba al girar, puerta de madera/chapa/blindada, marca si la sabés…",
+      "Ej: puerta de madera/chapa/blindada, marca de cerradura, si gira en falso…",
     tipo: "general",
   },
   {
     id: "cristal",
     label: "Puertas de cristal y frentes vidriados",
-    intro: "Puertas de vidrio templado y frentes de locales comerciales.",
+    intro: "Instalación y reparación de cerraduras para vidrio templado y frentes comerciales.",
     placeholderDetalle:
-      "Ej: puerta blindex de local, bisagra dañada, hoja no cierra bien, zona y referencia…",
+      "Ej: puerta blindex de local, herraje dañado, hoja desalineada, zona…",
+    tipo: "general",
+  },
+  {
+    id: "reposicionCristal",
+    label: "Reposición de puertas de cristal templado",
+    intro: "Reemplazamos puertas de cristal templado dañadas respetando espesor, perforaciones y herrajes existentes.",
+    placeholderDetalle:
+      "Ej: hoja rota, medidas aproximadas, si tiene bisagra de piso o manijón…",
     tipo: "general",
   },
   {
     id: "herrajes",
     label: "Herrajes y cerraduras",
-    intro: "Cilindros, picaportes, cerraduras adicionales y refuerzos.",
+    intro: "Refuerzos de seguridad, cerraduras adicionales, cilindros, picaportes y accesorios para puertas de todo tipo.",
     placeholderDetalle:
-      "Ej: cambio de cilindro, agregado de cerradura de seguridad, cantidad de puertas…",
+      "Ej: reforzar puerta, cambio de cilindro, agregar cerradura extra…",
     tipo: "general",
   },
   {
     id: "cierrapuertas",
-    label: "Cierra puertas de piso ",
-    intro: "Instalación y regulación de cierra puertas para edificios y locales.",
+    label: "Cierra puertas de piso",
+    intro: "Instalación y regulación de máquinas cierrapuerta de piso para edificios y locales.",
     placeholderDetalle:
-      "Ej: puerta de edificio, cierra muy fuerte o no llega a cerrar, cantidad de puertas…",
+      "Ej: cierra fuerte, no llega a cerrar, quedó desalineado…",
     tipo: "general",
   },
   {
     id: "vehiculos",
     label: "Apertura de vehículos",
-    intro: "Apertura de autos y utilitarios con llave adentro, sin rotura.",
+    intro: "Apertura sin rotura de autos y utilitarios con llave adentro.",
     placeholderDetalle:
-      "Ej: auto 4 puertas, marca, modelo, año, si está en la calle o en garage, altura exacta…",
+      "Ej: marca, modelo, año, si está en la calle o en garage…",
     tipo: "vehiculo",
   },
 ];
