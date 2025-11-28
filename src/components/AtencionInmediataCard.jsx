@@ -31,11 +31,11 @@ const SERVICIOS = [
   },
   {
     id: "cristal",
-    label: "Puertas de cristal y frentes vidriados",
+    label: "Puertas de cristal templado",
     baseText:
-      "Hola, necesito servicio de cerrajería en puertas de cristal o frentes vidriados.",
+      "Hola, necesito servicio de cerrajería en una puerta de cristal templado.",
     placeholder:
-      "Ej: puerta de vidrio templado de local, tipo de cerradura, si hay cerradura de piso, dirección…",
+      "Ej: puerta de cristal templado de local, tipo de cerradura, si tiene cierrapuerta de piso, dirección…",
     defaultTipoLugar: "local",
   },
   {
@@ -49,11 +49,11 @@ const SERVICIOS = [
   },
   {
     id: "cierrapuertas",
-    label: "Cierra puertas de piso",
+    label: "Máquinas cierrapuerta de piso",
     baseText:
-      "Hola, necesito instalar o regular cierra puertas de piso.",
+      "Hola, necesito instalar o regular máquinas cierrapuerta de piso.",
     placeholder:
-      "Ej: edificio o local, cantidad de puertas, si ya hay cierra puerta instalado, dirección…",
+      "Ej: edificio o local, cantidad de puertas, si ya hay cierrapuerta instalado, dirección…",
     defaultTipoLugar: "consorcio",
   },
   {
@@ -65,7 +65,6 @@ const SERVICIOS = [
     defaultTipoLugar: "vehiculo",
   },
 ];
-
 
 const TIPO_LUGAR_OPCIONES = [
   { value: "", label: "Seleccionar..." },
@@ -200,26 +199,68 @@ export default function AtencionInmediataCard({
         "flex flex-col gap-3",
       ].join(" ")}
     >
-      {/* Header fijo */}
-      <header className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-[0.7rem] font-semibold uppercase tracking-wide text-amber-300">
-            Atención inmediata
-          </p>
-          <p className="text-base sm:text-lg font-semibold">
-            Contanos qué necesitás
-          </p>
-          <p className="mt-1 max-w-xs text-[0.75rem] text-slate-300">
-            La Boca y alrededores. Priorizamos urgencias y personas afuera.
-          </p>
+      {/* Header: texto + badges, responsive */}
+      <header className="mb-1">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-[0.7rem] font-semibold uppercase tracking-wide text-amber-300">
+              Atención inmediata
+            </p>
+            <p className="text-base sm:text-lg font-semibold">
+              Contanos qué necesitás
+            </p>
+            <p className="mt-1 max-w-xs text-[0.75rem] text-slate-300">
+              La Boca y alrededores. Priorizamos urgencias y personas afuera.
+            </p>
+          </div>
+
+          {/* Badges en desktop/tablet: arriba a la derecha */}
+          <div className="hidden flex-col items-end gap-1.5 sm:flex">
+            <div
+              className="inline-flex items-center gap-2 rounded-full bg-amber-400/15 px-3 py-1 text-[0.7rem] font-semibold text-amber-200 shadow-sm ring-1 ring-amber-400/40"
+              aria-label="WhatsApp activo para recibir consultas"
+            >
+              <span
+                className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_3px_rgba(74,222,128,0.45)]"
+                aria-hidden="true"
+              />
+              <span className="whitespace-nowrap">WhatsApp activo</span>
+            </div>
+            <div
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-[0.7rem] font-semibold text-emerald-200 shadow-sm ring-1 ring-emerald-400/45"
+              aria-label="Prioridad para urgencias"
+            >
+              <span
+                className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_0_3px_rgba(251,191,36,0.45)]"
+                aria-hidden="true"
+              />
+              <span className="whitespace-nowrap">Urgencias primero</span>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col items-end gap-1.5">
-          <span className="inline-flex items-center rounded-full bg-amber-400/15 px-3 py-1 text-[0.7rem] font-semibold text-amber-200">
-            WhatsApp activo
-          </span>
-          <span className="inline-flex items-center rounded-full bg-emerald-500/15 px-3 py-1 text-[0.7rem] font-semibold text-emerald-200">
-            Urgencias primero
-          </span>
+
+        {/* Badges en mobile: debajo del título, en fila */}
+        <div className="mt-3 flex flex-wrap gap-1.5 sm:hidden">
+          <div
+            className="inline-flex items-center gap-2 rounded-full bg-amber-400/15 px-3 py-1 text-[0.7rem] font-semibold text-amber-200 shadow-sm ring-1 ring-amber-400/40"
+            aria-label="WhatsApp activo para recibir consultas"
+          >
+            <span
+              className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_3px_rgba(74,222,128,0.45)]"
+              aria-hidden="true"
+            />
+            <span className="whitespace-nowrap">WhatsApp activo</span>
+          </div>
+          <div
+            className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-[0.7rem] font-semibold text-emerald-200 shadow-sm ring-1 ring-emerald-400/45"
+            aria-label="Prioridad para urgencias"
+          >
+            <span
+              className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_0_3px_rgba(251,191,36,0.45)]"
+              aria-hidden="true"
+            />
+            <span className="whitespace-nowrap">Urgencias primero</span>
+          </div>
         </div>
       </header>
 
@@ -281,18 +322,11 @@ export default function AtencionInmediataCard({
           </div>
         ) : (
           // PASO 2 – Formulario
-          <form
-            onSubmit={handleSubmit}
-            className="flex h-full flex-col gap-2"
-          >
+          <form onSubmit={handleSubmit} className="flex h-full flex-col gap-2">
             <div className="flex items-center justify-between gap-2">
               <div className="text-[0.7rem]">
-                <p className="font-semibold text-amber-200">
-                  MOTIVO ELEGIDO
-                </p>
-                <p className="text-slate-50">
-                  {selectedServicio.label}
-                </p>
+                <p className="font-semibold text-amber-200">MOTIVO ELEGIDO</p>
+                <p className="text-slate-50">{selectedServicio.label}</p>
               </div>
               <button
                 type="button"
@@ -408,7 +442,7 @@ export default function AtencionInmediataCard({
                 href={`tel:+541133164381`}
                 className="inline-flex w-full items-center justify-center rounded-full border border-amber-400/70 px-4 py-2.5
                            text-sm font-semibold text-marine-700
-                           hover:bg-amber-400/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber600"
+                           hover:bg-amber-400/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
               >
                 Llamar ahora
               </a>

@@ -6,15 +6,16 @@ const serviciosIntroMobile =
   "Elegí el tipo de trabajo que necesitás. Atendemos viviendas, comercios y consorcios en La Boca y alrededores.";
 
 const serviciosIntroDesktop =
-  "Trabajamos sobre cerraduras, herrajes, puertas de cristal y apertura de vehículos, con atención en La Boca y alrededores.";
+  "Trabajamos sobre cerraduras, herrajes, puertas de cristal templado, máquinas cierrapuerta de piso y apertura de vehículos, con atención en La Boca y alrededores.";
 
 // Subtítulo bajo el título según slug
 const subheadingBySlug = {
   "urgencias-24-horas": "Servicio especializado",
   reparaciones: "Servicio especializado",
-  "puertas-de-cristal": "Comercios y locales",
+  "puertas-de-cristal": "Puertas de cristal templado",
+  blindex: "Reposición de cristal templado",
   "herrajes-y-cerraduras": "Refuerzos de seguridad",
-  "cierrapuertas-de-piso": "Edificios y locales",
+  "cierrapuertas-de-piso": "Máquinas cierrapuerta de piso",
   "apertura-de-vehiculos": "Autos y utilitarios",
 } as const;
 
@@ -23,6 +24,7 @@ const subheadingClassBySlug = {
   "urgencias-24-horas": "text-red-300/80",
   reparaciones: "text-sky-300/80",
   "puertas-de-cristal": "text-cyan-300/80",
+  blindex: "text-sky-300/80",
   "herrajes-y-cerraduras": "text-emerald-300/80",
   "cierrapuertas-de-piso": "text-amber-300/80",
   "apertura-de-vehiculos": "text-indigo-300/80",
@@ -35,11 +37,13 @@ const footerBySlug = {
   reparaciones:
     "Ideal cuando la cerradura todavía funciona pero no da seguridad.",
   "puertas-de-cristal":
-    "Pensado para negocios, oficinas y frentes vidriados.",
+    "Pensado para negocios, oficinas y accesos con puertas de cristal templado.",
+  blindex:
+    "Reposición de puertas de cristal templado dañadas o rotas, respetando medidas y herrajes existentes.",
   "herrajes-y-cerraduras":
     "Útil cuando querés reforzar accesos sin cambiar toda la puerta.",
   "cierrapuertas-de-piso":
-    "Recomendado para puertas de acceso principal y pasillos de uso frecuente.",
+    "Recomendado para puertas de cristal templado en accesos principales y pasillos de uso frecuente.",
   "apertura-de-vehiculos":
     "Para aperturas sin rotura en vía pública, garages o cocheras.",
 } as const;

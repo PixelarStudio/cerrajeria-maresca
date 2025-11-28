@@ -4,27 +4,35 @@ interface Props {
 }
 
 const { title } = Astro.props as Props;
-
-// Normalizamos el título a minúsculas para matchear
 const t = title.toLowerCase();
 
-// Variantes posibles según el tipo de servicio
-let variant:
+type Variant =
   | "urgencias"
   | "reparaciones"
   | "cristal"
+  | "blindex"
   | "herrajes"
   | "cierrapuertas"
   | "vehiculos"
-  | "default" = "default";
+  | "default";
 
-if (t.includes("urgencias")) variant = "urgencias";
-else if (t.includes("reparaciones")) variant = "reparaciones";
-else if (t.includes("cristal") || t.includes("vidriados")) variant = "cristal";
-else if (t.includes("herrajes") || t.includes("cerraduras")) variant = "herrajes";
-else if (t.includes("cierra puertas")) variant = "cierrapuertas";
-else if (t.includes("vehículos") || t.includes("vehiculos") || t.includes("auto"))
+let variant: Variant = "default";
+
+if (t.includes("urgencias") || t.includes("guardia")) {
+  variant = "urgencias";
+} else if (t.includes("reparaciones") || t.includes("arreglo")) {
+  variant = "reparaciones";
+} else if (t.includes("blindex") || t.includes("templado")) {
+  variant = "blindex";
+} else if (t.includes("cristal") || t.includes("vidriados") || t.includes("vidrio")) {
+  variant = "cristal";
+} else if (t.includes("herrajes") || t.includes("cerraduras") || t.includes("cilindros")) {
+  variant = "herrajes";
+} else if (t.includes("cierra puertas") || t.includes("cierrapuertas")) {
+  variant = "cierrapuertas";
+} else if (t.includes("vehículos") || t.includes("vehiculos") || t.includes("auto")) {
   variant = "vehiculos";
+}
 
 const baseClasses =
   "inline-flex h-9 w-9 items-center justify-center rounded-xl border text-sm";
@@ -36,6 +44,8 @@ const variantClasses =
     ? "border-amber-400/70 bg-amber-400/10 text-amber-100"
     : variant === "cristal"
     ? "border-cyan-400/70 bg-cyan-400/10 text-cyan-100"
+    : variant === "blindex"
+    ? "border-sky-400/70 bg-sky-400/10 text-sky-100"
     : variant === "herrajes"
     ? "border-emerald-400/70 bg-emerald-400/10 text-emerald-100"
     : variant === "cierrapuertas"
@@ -47,10 +57,9 @@ const variantClasses =
 
 <span class={baseClasses + " " + variantClasses} aria-hidden="true">
   {variant === "urgencias" && (
-    <!-- Sirena de emergencia -->
     <svg
       viewBox="0 0 24 24"
-      class="h-35 w-35"
+      class="h-[1.4rem] w-[1.4rem]"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
@@ -68,32 +77,28 @@ const variantClasses =
   )}
 
   {variant === "reparaciones" && (
-    <!-- Cerradura con llave inglesa -->
     <svg
       viewBox="0 0 24 24"
-      class="h-35 w-35"
+      class="h-[1.4rem] w-[1.4rem]"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
       stroke-linecap="round"
       stroke-linejoin="round"
     >
-      <!-- cuerpo cerradura -->
       <rect x="5" y="9" width="8" height="9" rx="2" />
       <path d="M8.5 9V7.5a3.5 3.5 0 0 1 7 0V9" />
       <circle cx="9" cy="13" r="1" />
       <path d="M9 14v2" />
-      <!-- llave inglesa atrás -->
       <path d="M13.5 7.5 17 4a2 2 0 0 1 1.8 3.1L17 8.5" />
       <path d="M14.2 8.2 17 11" />
     </svg>
   )}
 
   {variant === "cristal" && (
-    <!-- Panel de vidrio / frente -->
     <svg
       viewBox="0 0 24 24"
-      class="h-35 w-35"
+      class="h-[1.4rem] w-[1.4rem]"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
@@ -101,28 +106,41 @@ const variantClasses =
       stroke-linejoin="round"
     >
       <rect x="5" y="4" width="14" height="16" rx="1.8" />
-      <!-- reflejos -->
       <path d="M9 5.5 15 11" />
       <path d="M10 13.5 14 17.5" />
     </svg>
   )}
 
-  {variant === "herrajes" && (
-    <!-- Cilindro + llave -->
+  {variant === "blindex" && (
     <svg
       viewBox="0 0 24 24"
-      class="h-35 w-35"
+      class="h-[1.4rem] w-[1.4rem]"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
       stroke-linecap="round"
       stroke-linejoin="round"
     >
-      <!-- cilindro -->
+      <rect x="4.5" y="4" width="15" height="16" rx="1.8" />
+      <path d="M12 4v16" />
+      <path d="M15 9v6" />
+      <path d="M8 6.5 11 10" />
+    </svg>
+  )}
+
+  {variant === "herrajes" && (
+    <svg
+      viewBox="0 0 24 24"
+      class="h-[1.4rem] w-[1.4rem]"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.7"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <rect x="4.5" y="8" width="9" height="8" rx="2" />
       <circle cx="8.5" cy="12" r="1" />
       <path d="M8.5 13v1.4" />
-      <!-- llave -->
       <path d="M13.5 11.5 18 7" />
       <path d="M18 7l2 2" />
       <path d="M16.5 8.5l1.5 1.5" />
@@ -130,45 +148,37 @@ const variantClasses =
   )}
 
   {variant === "cierrapuertas" && (
-    <!-- Puerta lateral con brazo de cierrapuertas -->
     <svg
       viewBox="0 0 24 24"
-      class="h-35 w-35"
+      class="h-[1.4rem] w-[1.4rem]"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
       stroke-linecap="round"
       stroke-linejoin="round"
     >
-      <!-- marco -->
       <rect x="6" y="4" width="9" height="16" rx="1.2" />
-      <!-- hoja -->
       <path d="M11 4v16" />
-      <!-- brazo / riel superior -->
       <path d="M11 6h6" />
       <path d="M17 6v4" />
-      <!-- perilla -->
       <circle cx="10" cy="12" r="0.7" />
     </svg>
   )}
 
   {variant === "vehiculos" && (
-    <!-- Auto con llave -->
     <svg
       viewBox="0 0 24 24"
-      class="h-35 w-35"
+      class="h-[1.4rem] w-[1.4rem]"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
       stroke-linecap="round"
       stroke-linejoin="round"
     >
-      <!-- auto -->
       <path d="M4 14h13.5L16.5 9.5A2 2 0 0 0 14.7 8.5H7.3A2 2 0 0 0 5.5 9.5L4 14Z" />
       <path d="M4.5 14.5v2a1.5 1.5 0 0 0 1.5 1.5H16" />
       <circle cx="7.5" cy="16" r="1" />
       <circle cx="14" cy="16" r="1" />
-      <!-- llave simple arriba -->
       <path d="M17 6h3" />
       <path d="M17 6a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
       <path d="M19 6v1.5" />
@@ -176,10 +186,9 @@ const variantClasses =
   )}
 
   {variant === "default" && (
-    <!-- Icono neutro -->
     <svg
       viewBox="0 0 24 24"
-      class="h-24 w-24"
+      class="h-[1.2rem] w-[1.2rem]"
       fill="none"
       stroke="currentColor"
       stroke-width="1.7"
